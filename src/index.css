@@ -11,3 +11,191 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+
+.map_canvas {
+  background-color: lightgray;
+  width: 100vw;
+  height: 100vh;
+}
+.list_canvas {
+  background-color: darkgrey;
+  width: 100vw;
+  height: 100vh;
+}
+
+.overlay {
+  background-color: rgba(0,0,0,0.5);
+  box-sizing: border-box;
+  padding: 10vw;
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  z-index: 5;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+.useroverlay {
+  width: 80vw;
+  max-width: 400px;
+  background-color: white;
+  box-sizing: border-box;
+  padding: 5vw;
+  z-index: 99;
+}
+
+.top_navigation {
+  z-index: 2;
+  width: 100%;
+  box-sizing: border-box;
+  padding: 2vw;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+.newbtn_navigation {
+  position: absolute;
+  bottom: 50px;
+  right: 50px;
+  z-index: 2;
+}
+
+.closebtn_navigation {
+  position: absolute;
+  top: 50px;
+  right: 50px;
+  z-index: 10;
+}
+
+.newitem_total {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+  width: 100vw;
+  box-sizing: border-box;
+  padding: 12vh 50px 50px 50px;
+}
+
+.newitem_total input {
+  margin-bottom: 15px;
+  width: 70vw;
+}
+
+button {
+  font-size: 16px;
+  border-radius: 5px;
+  padding: 10px 15px;
+}
+
+
+.higher {
+  z-index: 99;
+  position: absolute;
+  bottom: 150px;
+  right: 150px;
+  background: white;
+}
+
+
+.innerBox {
+  overflow-y: scroll;
+}
+
+
+.locationdragger_total {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.pointer {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  left: 50vw;
+  top:30vh;
+  background: red;
+  z-index: 99;
+  position: absolute;  
+}
+
+
+.list {
+  width: 100vw;
+  height: 100vh;
+  box-sizing:border-box;
+  padding: 50px;
+  overflow-y: scroll;
+}
+
+.listitem {
+  width: 100%;
+  max-width: 700px;
+  border-bottom: 1px solid grey;
+  background-color: white;
+  -webkit-box-shadow: 0px 2px 10px 0px rgba(0,0,0,0.25);
+  -moz-box-shadow: 0px 2px 10px 0px rgba(0,0,0,0.25);
+  box-shadow: 0px 2px 10px 0px rgba(0,0,0,0.25);
+  margin: 5px;
+  box-sizing:border-box;
+  padding: 20px;
+}
+
+.listitem p, small, h4 {
+  margin: 0;
+}
+
+.avatarimg {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+}
+
+
+.avatar_total {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  box-sizing: border-box;
+  padding: 0 0 50px 0;
+}
+
+.avatar_edit_btn {
+  position: absolute;
+  margin: 40px 0 0 20px;
+}
+.avatar {
+  margin: 0;
+  padding: 4px 4px 2px 4px;
+  box-sizing: border-box;
+  border: 4px solid #D1E7F1;
+  border-radius: 50%;
+}
+
+.avatar img {
+  width: 72px;
+  border-radius: 50%;
+}
+
+.editor-canvas {
+  width: 200px;
+  height: 200px;
+}
+
+.smallio {
+  width: 100px;
+}
