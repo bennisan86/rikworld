@@ -1,7 +1,8 @@
 import React from "react";
-import ReactDOM from "react-dom";
 import ReactAvatarEditor from 'react-avatar-editor'
 import avataredit from '../Avatareditor/avatar_edit.png';
+import { Up, Cancel, Confirm } from '../../svgs/OtherIcons'
+import { Slider } from 'antd';
 
 class Avatareditor extends React.Component {
   constructor(props) {
@@ -10,7 +11,7 @@ class Avatareditor extends React.Component {
     image: avataredit,
     allowZoomOut: false,
     position: { x: 0.5, y: 0.5},
-    scale: 1.6,
+    scale: 2,
     rotate: 0,
     borderRadius: 50,
     preview: null,
@@ -28,8 +29,7 @@ class Avatareditor extends React.Component {
   }
 
   handleScale = e => {
-    const scale = parseFloat(e.target.value)
-    this.setState({ scale })
+    this.setState({ scale: e })
   }
 
   handlePositionChange = position => {
@@ -38,7 +38,6 @@ class Avatareditor extends React.Component {
 
   onClickSave = () => {
     if (this.editor) {
-      const canvas = this.editor.getImage();
       const canvasScaled = this.editor.getImageScaledToCanvas()
       const newimg = new Image();
       newimg.id = "pic";
@@ -80,14 +79,16 @@ class Avatareditor extends React.Component {
 
         {this.state.currentv ? 
         <div className="avatar_total">
-            <button className="avatar_edit_btn" onClick={this.triggerClick}>up</button>
+            <button className="avatar_edit_btn shadow" onClick={this.triggerClick}>
+              <Up width={16}/>
+            </button>
             <div className="avatar">
-                <img src={this.state.image} alt="avatar image"/>
+                <img src={this.state.image} alt="uploaded avatar"/>
             </div>
         </div>
         :
-        <div>
-          <div>
+        <div className="centeredcolumn">
+          <div className="centeredcolumn">
             <ReactAvatarEditor
               ref={this.setEditorRef}
               scale={parseFloat(this.state.scale)}
@@ -101,22 +102,25 @@ class Avatareditor extends React.Component {
               className="editor-canvas"
             />
           </div>
-          <br />
-
-          <br />
-          <input
+          <Slider
+            className="zoomslider"
             name="scale"
-            type="range"
+            tooltipVisible={false}
             onChange={this.handleScale}
-            min={this.state.allowZoomOut ? '0.1' : '1'}
-            max="2"
-            step="0.01"
-            defaultValue="1"
+            min={1}
+            max={5}
+            step={0.01}
+            defaultValue={0}
+            value={this.state.scale}
           />
-          <br />
-          <button onClick={this.onClickSave}>save!</button>
-          <button onClick={this.onClickNope}>nope!</button>
-
+          <div className="centeredrow">
+            <button className="avatar_cc_btn shadow" onClick={this.onClickNope}>
+              <Cancel width={14}/>
+            </button>
+            <button className="avatar_cc_btn shadow" onClick={this.onClickSave}>
+              <Confirm width={22}/>
+            </button>
+          </div>
         </div>
       }
       </div>

@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
-import * as ROUTES from '../../constants/routes';
+import { CloseButton } from '../Navigation';
 
 
 class About extends Component {
@@ -15,6 +14,7 @@ class About extends Component {
 
         return (
             <div className="">
+                    <CloseButton history={this.props.history} />
                 <h1>About page</h1>
             </div>
         );

@@ -1,13 +1,7 @@
 import React, { Component } from 'react';
 import { withFirebase } from '../Firebase';
-
-const SignInTotal = (props) => (
-  <div>
-    <h1>SignIn</h1>
-    <SignInForm onComplete={props.onComplete} />
-  </div>
-);
-
+import { Input, Button } from 'antd';
+import avatardefault from '../Avatar/avatar_default.png';
 
   const INITIAL_STATE = {
     email: '',
@@ -44,31 +38,38 @@ const SignInTotal = (props) => (
       const { email, password, error } = this.state;
       const isInvalid = password === '' || email === '';
       return (
-        <form onSubmit={this.onSubmit}>
-          <input
+      <div className="centeredcolumn">
+        <img className="avatarimg margbot20" src={avatardefault} alt="default avatar" />
+          <Input
             name="email"
+            className="inputter"
+            size="large"
             value={email}
             onChange={this.onChange}
             type="text"
             placeholder="Email Address"
           />
-          <input
+          <Input
             name="password"
+            className="inputter"
+            size="large"
             value={password}
             onChange={this.onChange}
             type="password"
             placeholder="Password"
           />
-          <button disabled={isInvalid} type="submit">
-            Sign In
-          </button>
+          <Button
+            size="large"
+            className="loginbtn shadow margbot20"
+            disabled={isInvalid}
+            onClick={this.onSubmit}>inloggen
+          </Button>
           {error && <p>{error.message}</p>}
-        </form>
+      </div>
       );
     }
   }
 
   const SignInForm = withFirebase(SignInFormBase);
 
-export default SignInTotal;
-export { SignInForm };
+export default SignInForm;

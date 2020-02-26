@@ -5,8 +5,7 @@ import About from './components/Aboutpage';
 import Profile from './components/Profilepage';
 import Newitem from './components/Newitempage';
 import Locationdragger from './components/Locationdraggerpage';
-import { withAuthentication,AuthUserContext } from './components/Session';
-// import { AuthUserContext } from '../Session';
+import { withAuthentication } from './components/Session';
 
 class App extends Component {
   constructor(props) {
@@ -47,7 +46,9 @@ class App extends Component {
     );
 
     this.props.firebase.items().on('value', async snapshot => {
-        const ItemsObject = snapshot.val();
+      console.log("Yellow");
+
+      const ItemsObject = snapshot.val();
         const itemsList = await Promise.all(Object.keys(ItemsObject).map(async(key) => {
           const user = await this.props.firebase.users().child(ItemsObject[key].userId).once('value', snapshot => { return snapshot.val()});
             return(
@@ -61,6 +62,7 @@ class App extends Component {
           itemsList:itemsList,
         })
     });
+
   }
 
   componentWillUnmount() {

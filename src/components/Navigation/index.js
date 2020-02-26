@@ -3,6 +3,10 @@ import React from 'react';
 import { Link, withRouter } from 'react-router-dom';
 import { withFirebase } from '../Firebase';
 import Avatar from '../Avatar';
+// import AboutRik from '../../imgs/aboutrik.png'
+import AboutIcon from '../../svgs/AboutIcon'
+import Plus, { Cancel } from '../../svgs/OtherIcons'
+import Locater, { List } from '../../svgs/ToggleIcons'
 
 import * as ROUTES from '../../constants/routes';
 
@@ -11,13 +15,31 @@ function Navigation(props) {
     const maplist = props.maplist;
     return (
         <div className="top_navigation">
-            <button><Link to={ROUTES.ABOUT}>about Rik.world</Link></button>
+            <Link to={ROUTES.ABOUT}>
+                {/* <img className="abouticon" src={AboutRik} /> */}
+                <AboutIcon width={60} viewBox={'0 0 52 56'} />
+                </Link>
             {maplist ?
-                <button onClick={props.toggleMaplist}><strong>map</strong>/list</button>
+                <div className="toggleswitch" onClick={props.toggleMaplist}>
+                    <div className="toggleswitch_part_right">
+                    <Locater width={24} />
+                    </div>
+                    <div className="toggleswitch_part_left">
+                    <List className={'opac20'} width={24} />
+                    </div>
+                </div>
             :
-                <button onClick={props.toggleMaplist}>map/<strong>list</strong></button>
+                <div className="toggleswitch" onClick={props.toggleMaplist}>
+                    <div className="toggleswitch_part_right">
+                    <Locater className={'opac20'} width={24} />
+                    </div>
+                    <div className="toggleswitch_part_left">
+                    <List width={24} />
+                    </div>
+                </div>
             }
             <Avatar
+                className={"navshadow"}
                 user={user}
                 onClick={props.onClick} />
         </div>               
@@ -26,14 +48,16 @@ function Navigation(props) {
 
 const NewButton = () => { 
     return(
-    <button className="newbtn_navigation"><Link to={ROUTES.NEWITEM}>+ new post</Link></button>
+    <button className="newbtn_navigation navshadow"><Link to={ROUTES.NEWITEM}><Plus width={28}/></Link></button>
     )
 };
 
 
 const CloseButton = (props) => { 
     return(
-    <button className="closebtn_navigation" onClick={() => props.history.push(ROUTES.HOME)}>x</button>
+    <button className="closebtn_navigation" onClick={() => props.history.push(ROUTES.HOME)}>
+        <Cancel width={20} fill={'#0073A7'} />
+    </button>
     )
 };
 

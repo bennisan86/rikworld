@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { withFirebase } from '../Firebase';
 import Avatar from '../Avatar';
+import { Input, Button } from 'antd';
 
 const SignUpTotal = (props) => (
       <SignUpForm onComplete={props.onComplete} />
@@ -55,67 +56,78 @@ const INITIAL_STATE = {
       this.setState({ avatar: image });
     }
     render() {
-      console.log(">>>>",this.state.avatar);
       const {
             username,
             email,
             passwordOne,
             passwordTwo,
             error,
+            avatar,
           } = this.state;
 
         const isInvalid =
             passwordOne !== passwordTwo ||
             passwordOne === '' ||
             email === '' ||
-            username === '';
+            username === '' ||
+            avatar === '';
 
         return (
           <div>
             <Avatar
-              view='edit_default'
-              onSetImage={(image) => this.setImage(image)}/>
-            <form onSubmit={this.onSubmit}>
-            <input
-          name="username"
-          value={username}
-          onChange={this.onChange}
-          type="text"
-          placeholder="Full Name"
-        />
-        <input
-          name="email"
-          value={email}
-          onChange={this.onChange}
-          type="text"
-          placeholder="Email Address"
-        />
-        <input
-          name="passwordOne"
-          value={passwordOne}
-          onChange={this.onChange}
-          type="password"
-          placeholder="Password"
-        />
-        <input
-          name="passwordTwo"
-          value={passwordTwo}
-          onChange={this.onChange}
-          type="password"
-          placeholder="Confirm Password"
-        />
-        <button disabled={isInvalid} type="submit">
-            Sign Up</button>
-        {error && <p>{error.message}</p>}
-        </form>
-
+                view='edit_default'
+                onSetImage={(image) => this.setImage(image)}/>
+            <Input
+            name="username"
+            className="inputter"
+            size="large"
+            value={username}
+            onChange={this.onChange}
+            type="text"
+            placeholder="Full Name"
+          />
+          <Input
+            name="email"
+            className="inputter"
+            size="large"
+            value={email}
+            onChange={this.onChange}
+            type="text"
+            placeholder="Email Address"
+          />
+          <Input
+            name="passwordOne"
+            className="inputter"
+            size="large"
+            value={passwordOne}
+            onChange={this.onChange}
+            type="password"
+            placeholder="Password"
+          />
+          <Input
+            name="passwordTwo"
+            className="inputter"
+            size="large"
+            value={passwordTwo}
+            onChange={this.onChange}
+            type="password"
+            placeholder="Confirm Password"
+          />
+          <Button
+            size="large"
+            className="loginbtn shadow margbot20"
+            disabled={isInvalid}
+            onClick={this.onSubmit}>
+              aanmaken
+              </Button>
+          {error && <p>{error.message}</p>}
         </div>
       );
     }
   }
   
   const SignUpLink = (props) => (
-      <button onClick={props.onClick}>Geen account?</button>
+      <div className="textlink" onClick={props.onClick}>Geen account?</div>
   );
 const SignUpForm = withFirebase(SignUpFormBase);
 

@@ -4,7 +4,8 @@ import ReactDOM from 'react-dom';
 import { BrowserRouter as Router } from 'react-router-dom';
 import Firebase, { FirebaseContext } from './components/Firebase';
 
-import './index.css';
+import 'antd/dist/antd.css'; 
+import './index.scss';
 import App from './App';
 
 

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import avatardefault from '../Avatar/avatar_default.png';
 import Avatareditor from '../Avatareditor';
 
@@ -8,14 +8,14 @@ import * as ROUTES from '../../constants/routes';
 
 
 const Avatar = (props) => {
-    const [currentView, setCurrentView] = useState(props.view);
     const imageSet = (image) => {
         props.onSetImage(image);
     };
-    switch(currentView) {
+    const classerz = 'avatarimg ' + props.className;
+    switch(props.view) {
         case 'otheruser':
             return (
-                <img className="avatarimg" src={props.otheruser} />
+                <img className={classerz} src={props.otheruser} alt='useravatar' />
             );
         case 'edit_default':
             return (
@@ -23,11 +23,11 @@ const Avatar = (props) => {
             );
         default:
         return (
-            <div>
+            <div className="minimarg">
             {props.user ?
-                <Link to={ROUTES.PROFILE}><img onClick={props.toProfile} className="avatarimg" src={props.user.avatar} /></Link>
+                <Link to={ROUTES.PROFILE}><img onClick={props.toProfile} className={classerz} src={props.user.avatar} alt='current user avatar' /></Link>
             :
-            <img className="avatarimg" onClick={props.onClick} src={avatardefault} />
+            <img  className={classerz} onClick={props.onClick} src={avatardefault} alt='defaultavatar' />
             }
             </div>
           );

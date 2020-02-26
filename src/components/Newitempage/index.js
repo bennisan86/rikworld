@@ -3,6 +3,9 @@ import * as ROUTES from '../../constants/routes';
 import { AuthUserContext } from '../Session';
 import { withFirebase } from '../Firebase';
 import { CloseButton } from '../Navigation';
+import { Input, Button } from 'antd';
+import { Image, Locationpin } from '../../svgs/OtherIcons'
+import Loader from 'react-loader-spinner'
 
 class Newitem extends Component {
     constructor(props) {
@@ -13,6 +16,7 @@ class Newitem extends Component {
             lat: this.props.tempitem.lat,
             long: this.props.tempitem.long,
             image: this.props.tempitem.image,
+            progress: false,
         };
     }
 
@@ -80,7 +84,10 @@ class Newitem extends Component {
         const uploadTask = this.props.firebase.strg.ref(`itempics/${image.name}`).put(image);
         uploadTask.on('state_changed', 
         (snapshot) => {
-            //progress function ...
+            console.log('this is progress!',snapshot);
+            this.setState({ 
+                progress: true
+            });
         },
         (error) => {
             console.log(error);
@@ -89,6 +96,7 @@ class Newitem extends Component {
             this.props.firebase.strg.ref(`itempics/`).child(image.name).getDownloadURL().then(url => {
                 console.log(url);
                 this.setState({ 
+                    progress: false,
                     image: {
                         image: image,
                         url: url
@@ -118,19 +126,50 @@ class Newitem extends Component {
       }
 
     render(){
-        const { msg, date } = this.state;
+        const { msg, date, lat, long, image, progress } = this.state;
+        const { TextArea } = Input;
+        const isInvalid = 
+            msg !== "" &
+            date !== "" &
+            lat !== null &
+            long !== null &
+            image !== {
+                image: null,
+                url: ''
+            };
+
+        console.log('isInvalid',isInvalid, 'state',this.state);
+
         return (
             <AuthUserContext.Consumer>
                 {authUser => (
                 <div className="newitem_total">
                     <CloseButton history={this.props.history} />
-                    {this.state.image.url ?
-                        <div>
-                            <img src={this.state.image.url} />
-                            <button onClick={this.deleteUpload}>delete?</button>
-                        </div> :
-                        <div>
-                            <button onClick={this.triggerClick}>Choose image now, baby!</button>
+                    {image.url ?
+                    <div>
+                        <div className="img_upload_total">
+                            <div className="img_upload_total_canvas">
+                            <img src={image.url} alt='uploaded' />
+                            </div>
+                        </div>
+                        <button onClick={this.deleteUpload}>delete?</button>
+                    </div>
+                        :
+                        <div className="img_upload_total">
+                            <div className="img_upload_total_canvas">
+                            {!progress ? 
+                                <button className="img_upload_btn shadow" onClick={this.triggerClick}>
+                                    <Image width={20} />
+                                </button>
+                            :
+                                <Loader
+                                    type="Oval"
+                                    color="#0073A7"
+                                    width={50}
+                                    height={50}
+                                />
+                            }
+                            </div>
                             <input
                                 id='selectImage'
                                 hidden="hidden"
@@ -138,26 +177,36 @@ class Newitem extends Component {
                                 onChange={this.handleChange} />
                         </div>
                     }
-                    <input
+                    <Button
+                    onClick={(tempdata) => this.gotoLocationdragger(tempdata)}
+                    size="large"
+                    className="navshadow centeredrow">
+                        <div className="locatie_aanduiden_btn">
+                            <Locationpin width={16} />
+                            {lat && long ?
+                            <div className="locatie_aanduiden_btn_latlong centeredrow">
+                            <p>{long}</p><p> - </p><p>{lat}</p>
+                            </div>
+                            :
+                            <p>locatie aanduiden op kaart</p>}
+                        </div>
+                    </Button>
+                    <TextArea
+                        rows={6}
                         type="text"
+                        size="large"
                         name="msg"
                         value={msg}
                         onChange={event => this.onChangeText(event)}
-                        placeholder="Message"/>
-                    <input
+                        placeholder="Jouw bericht"/>
+                    <Input
                         type="date"
                         name="date"
+                        size="large"
                         value={date}
                         onChange={event => this.onChangeText(event)}
                         placeholder="Date"/>
-                        {this.props.tempitem.lat && this.props.tempitem.long ? 
-                        <div>
-                        <p>Latitude: {this.props.tempitem.lat}</p>
-                        <p>Longitude: {this.props.tempitem.long}</p>
-                        </div> :
-                    <button onClick={(tempdata) => this.gotoLocationdragger(tempdata)}>add location</button>}
-
-                    <button onClick={event => this.onCreateItem(event, authUser)}>click</button>
+                    <Button className="loginbtn" disabled={!isInvalid} onClick={event => this.onCreateItem(event, authUser)}>posten!</Button>
                 </div>
                 )}
 

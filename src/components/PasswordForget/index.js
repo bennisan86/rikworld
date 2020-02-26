@@ -1,10 +1,9 @@
 import React, { Component } from 'react';
 import { withFirebase } from '../Firebase';
-
+import { Input, Button } from 'antd';
 
 const PasswordForgetTotal = (props) => (
   <div>
-    <h1>PasswordForget</h1>
     <PasswordForgetForm onComplete={props.onComplete} />
   </div>
 );
@@ -37,24 +36,46 @@ class PasswordForgetFormBase extends Component {
     const { email, error } = this.state;
     const isInvalid = email === '';
     return (
-      <form onSubmit={this.onSubmit}>
-        <input
-          name="email"
-          value={this.state.email}
-          onChange={this.onChange}
-          type="text"
-          placeholder="Email Address"
-        />
-        <button disabled={isInvalid} type="submit">
-          Reset My Password
-        </button>
+
+<div>
+      <p className="centeredtxt">Paswoord vergeten?</p>
+      <Input
+      name="passwordTwo"
+      className="inputter"
+      size="large"
+      // name="email"
+      value={this.state.email}
+      onChange={this.onChange}
+      type="text"
+      autoFocus
+      placeholder="Je email adres"
+    />
+    <Button
+      size="large"
+      className="loginbtn shadow margbot20"
+      disabled={isInvalid}
+      onClick={this.onSubmit}>
+        aanvragen
+        </Button>
         {error && <p>{error.message}</p>}
-      </form>
+
+        </div>
+        // <input
+        //   name="email"
+        //   value={this.state.email}
+        //   onChange={this.onChange}
+        //   type="text"
+        //   placeholder="Email Address"
+        // />
+        // <button disabled={isInvalid} type="submit">
+        //   Reset Mijn Password
+        // </button>
+
     );
   }
 }
 const PasswordForgetLink = (props) => (
-    <button onClick={props.onClick}>Paswoord vergeten?</button>
+    <div className="textlink" onClick={props.onClick}>Paswoord vergeten?</div>
 );
 
 export default PasswordForgetTotal;
