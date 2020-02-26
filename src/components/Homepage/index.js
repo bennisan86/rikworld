@@ -14,7 +14,7 @@ const geolocateStyle = {
     top: '120px',
     right: '35px',
     position: 'absolute',
-    margin: '5px',
+    margin: '2px',
   };
 
 const Homepage = (props) => {
