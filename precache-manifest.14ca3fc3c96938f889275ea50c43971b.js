@@ -1,6 +1,6 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "a3d51885fb0b5b5f63d1ef319f3fc9cd",
+    "revision": "96975d9e369001a62e5ade8f537805e2",
     "url": "/rikworld/index.html"
   },
   {
