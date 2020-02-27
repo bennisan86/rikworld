@@ -97,11 +97,11 @@ class App extends Component {
   render(){
     return (
           <Switch>
-            <Route exact path="/" render={(props) =>
+            {/* <Route exact path="/" render={(props) =>
               <Homepage
               {...this.state}
-              toggleMaplist={(maplist) => this.toggleMaplist(maplist)} />} />
-            <Route exact path="/about" component={About} />
+              toggleMaplist={(maplist) => this.toggleMaplist(maplist)} />} /> */}
+            <Route exact path="/" component={About} />
             <Route exact path="/profile" component={Profile} />
             <Route exact path="/newitem" render={(props) => <Newitem {...props} tempitem={this.state.tempitem} onSubmit={(tempdata) => this.setTempData(tempdata)} />} />
             <Route exact path="/locationdragger" render={(props) => <Locationdragger tempitem={this.state.tempitem} {...props} onSubmit={(tempdata) => this.setTempData(tempdata)} />} />

@@ -34,12 +34,12 @@ const Homepage = (props) => {
                 </div>
                 }
                 </>
-                <Navigation currentuser={props.currentuser} onClick={() => toggleShowOverlay(true)} toggleMaplist={(maplist) => props.toggleMaplist(maplist)} maplist={maplist}/>
+                test
+                {/* <Navigation currentuser={props.currentuser} onClick={() => toggleShowOverlay(true)} toggleMaplist={(maplist) => props.toggleMaplist(maplist)} maplist={maplist}/>
                 {props.currentuser &&
-                <NewButton />}
+                <NewButton />} */}
 
-                {/* <Button className="higher" onClick={() => clickedController()}>Hier!</Button> */}
-
+{/* 
                 {props.maplist && 
                 <Map itemsList={itemsList} />}
                 {!props.maplist && 
@@ -56,7 +56,7 @@ const Homepage = (props) => {
                     ))
                     }
                 </div>
-                }
+                } */}
             </div>
         );
     }
@@ -87,7 +87,7 @@ const Homepage = (props) => {
         // }
 
         const setAlteredViewport = (item,viewport) => {
-            const addedlat = item.lat + 0.03;
+                const addedlat = item.lat + 0.03;
                 setViewport({
                 latitude: addedlat,
                 longitude: item.long,
@@ -139,7 +139,7 @@ const Homepage = (props) => {
                         }
                     }
                 }
-            console.log('current zoom',viewport.zoom);
+            console.log('current zoom',viewport.zoom,'current latitude',viewport.latitude);
         }
         return(
         <div>
