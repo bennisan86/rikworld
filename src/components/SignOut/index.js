@@ -2,17 +2,21 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import * as ROUTES from '../../constants/routes';
 import { withFirebase } from '../Firebase';
+import { Button } from 'antd';
 
 const SignOutButton = ({ firebase }) => {
   const signerOuter = () => {
     firebase.doSignOut();
   }
   return(
-  <button type="button" onClick={signerOuter}>
+  <Button
+    size="large"
+    onClick={signerOuter}
+    className="logoutbtn shadow">
     <Link to={ROUTES.HOME}>
-    Sign Out
+    afmelden
     </Link>
-  </button>
+  </Button>
   )
 };
 export default withFirebase(SignOutButton);

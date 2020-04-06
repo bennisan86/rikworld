@@ -46,9 +46,12 @@ function Navigation(props) {
     );
 }
 
-const NewButton = () => { 
+const NewButton = (props) => {
+    const buttonStyle = "newbtn_navigation navshadow " + props.buttonStyle;
     return(
-    <button className="newbtn_navigation navshadow"><Link to={ROUTES.NEWITEM}><Plus width={28}/></Link></button>
+    <div className="newbtn_navigation_container">
+    <button className={buttonStyle}><Link to={ROUTES.NEWITEM}><Plus width={28}/></Link></button>
+    </div>
     )
 };
 
@@ -56,7 +59,7 @@ const NewButton = () => {
 const CloseButton = (props) => { 
     return(
     <button className="closebtn_navigation" onClick={() => props.history.push(ROUTES.HOME)}>
-        <Cancel width={20} fill={'#0073A7'} />
+        <Cancel width={20} fill={props.fill} />
     </button>
     )
 };

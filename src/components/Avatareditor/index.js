@@ -1,6 +1,5 @@
 import React from "react";
 import ReactAvatarEditor from 'react-avatar-editor'
-import avataredit from '../Avatareditor/avatar_edit.png';
 import { Up, Cancel, Confirm } from '../../svgs/OtherIcons'
 import { Slider } from 'antd';
 
@@ -8,7 +7,7 @@ class Avatareditor extends React.Component {
   constructor(props) {
     super(props);
   this.state = {
-    image: avataredit,
+    image: this.props.image,
     allowZoomOut: false,
     position: { x: 0.5, y: 0.5},
     scale: 2,
@@ -18,7 +17,8 @@ class Avatareditor extends React.Component {
     width: 80,
     height: 80,
     newimg: '',
-    currentv: true
+    currentv: true,
+    classerzzzz: 'avatar_total'
   }
   this.triggerClick = this.triggerClick.bind(this);
 }
@@ -51,8 +51,9 @@ class Avatareditor extends React.Component {
   }
 
   onClickNope = () => {
+    this.props.triggerClick();
     this.setState({
-      image:avataredit,
+      image:this.props.image,
         currentv: true
       })
   }
@@ -60,13 +61,23 @@ class Avatareditor extends React.Component {
   setEditorRef = (editor) => this.editor = editor;
 
   triggerClick = () => {
+    this.props.triggerClick();
     this.setState({
       currentv: false
     })
-    document.getElementById("selectImage").click()
+    document.getElementById("selectImage").click();
+  }
+  componentDidMount(){
+    if(this.props.classerzzz){
+      const allclasses = 'avatar_total ' + this.props.classerzzz;
+      this.setState({
+        classerzzzz: allclasses
+      })
+    }
   }
   
   render() {
+
     return (
       <div>
             <input
@@ -78,7 +89,7 @@ class Avatareditor extends React.Component {
           />
 
         {this.state.currentv ? 
-        <div className="avatar_total">
+        <div className={this.state.classerzzzz}>
             <button className="avatar_edit_btn shadow" onClick={this.triggerClick}>
               <Up width={16}/>
             </button>

@@ -1,26 +1,164 @@
-import React, { Component } from 'react';
+import React, { useState,useEffect } from 'react';
 import SignOutButton from '../SignOut';
+import Avatar from '../Avatar';
+import Loader from 'react-loader-spinner'
+import { CloseButton } from '../Navigation';
+import { Edit, Cancel, Confirm } from '../../svgs/OtherIcons';
+import { Collapse, Input } from 'antd';
+import { Listitem } from '../Homepage';
 
+const Profile = (props) => {
+    const [currentView, setCurrentView] = useState('');
+    const [myItems,setMyItems] = useState(null);
+    const [newAvatar, setNewavatar] = useState(null);
+    const [newUsername, setNewusername] = useState(null);
+    const [showBoolean, toggleShowboolean] = useState(true);
+    const [itemTxt, setItemtxt] = useState('blablabla');
 
-class Profile extends Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-        };
-    }
-    componentDidMount(){
-    }
-    render(){
+    const { Panel } = Collapse;
+    const user = props.currentuser;
+    useEffect(() => {
+        setMyItems(props.myItemsList);
+        if(myItems !== null) {
+            const l = myItems.length;
+            if (l <= 1){
+                setItemtxt("je hebt 1 item gepost.");
+            } else {
+                setItemtxt("je hebt "+l+" items gepost.");
+            }
+        }
+    },[props.myItemsList, myItems]);
 
-        return (
-            <div className="">
-                <h1>Profile page</h1>
-                <SignOutButton />
+    const setNewStuff = (dinges) => {
+        setCurrentView('');
+        props.newUserStuff(dinges);
+    };
 
-            </div>
-        );
-    }
+    switch(currentView) {
+        case 'editinfo':
+          return (
+                <div className="profilepage_total">
+                    <CloseButton history={props.history} fill="#0073A7" />
+                    <div className="profilepage_top">
+                        {user ?
+                        <>
+                            <Avatar
+                                view="edit_profile"
+                                className="profilepage_avatar"
+                                user={user}
+                                onSetImageandClick={(image) => setNewavatar(image)}
+                                triggerClick={() => toggleShowboolean(!showBoolean)}/>
+                            {showBoolean &&
+                            <>
+                            <Input
+                                size="large"
+                                defaultValue={user.username}
+                                onChange={e => setNewusername(e.target.value)}
+                                type="text"
+                                placeholder="Je gebruikersnaam"/>
+                            <div className="centeredrow margtop50">
+                                <button className="avatar_cc_btn shadow" onClick={() => setCurrentView("")}>
+                                <Cancel width={14}/>
+                                </button>
+                                <button className="avatar_cc_btn shadow" onClick={() => setNewStuff({newAvatar,newUsername})}>
+                                <Confirm width={22}/>
+                                </button>
+                            </div>
+                            </>
+                            }
+                        </>
+                        :
+                        <div className="profilepage_top_loader">
+                            <Loader
+                            type="ThreeDots"
+                            color="#CDCDCD"
+                            width={50}
+                            height={50}
+                            />
+                        </div>
+                        }
+                    </div>
+                    <div className="profilepage_middle centeredcolumn opac20">
+                        <div className="profilepage_useritems">
+                        {myItems ?
+                        <>
+                        <p>{itemTxt}</p>
+                        <Collapse
+                            bordered={false}
+                            defaultActiveKey={['0']}>
+                            <Panel header="toon mijn items" key="1">
+                                {myItems &&
+                                myItems.map((item) => (
+                                    <Listitem key={item.uid} item={item}/>
+                                ))
+                                }
+                            </Panel>
+                        </Collapse>
+                        </>
+                        :
+                        <p className="noneyet">Je hebt nog geen items gepost.</p>
+                        }
+                        </div>
+                    </div>
+                    <div className="profilepage_bottom opac20">
+                        <SignOutButton disabled={true} mrg="jooo" />
+                    </div>
+                </div>
+            );
+        default:
+            return (
+                <div className="profilepage_total">
+                    <CloseButton history={props.history} fill="#0073A7" />
+                    <div className="profilepage_top">
+                        {user ?
+                        <>
+                        <Avatar view="profile" className="profilepage_avatar" user={user}/>
+                        <p>{user.username}</p>
+                        <p>{user.email}</p>
+                        </>
+                        :
+                        <div className="profilepage_top_loader">
+                            <Loader
+                            type="ThreeDots"
+                            color="#CDCDCD"
+                            width={50}
+                            height={50}
+                            />
+                        </div>
+                        }
+                    </div>
+                    <div className="profilepage_middle centeredcolumn">
+                        <button className="profilepage_middle_btn shadow" onClick={() => setCurrentView("editinfo")}>
+                            <Edit width={16}/>
+                        </button>
+                        <div className="profilepage_useritems">
+                        {myItems ?
+
+                        <>
+                            <p>{itemTxt}</p>
+                            <Collapse
+                                bordered={false}
+                                defaultActiveKey={['0']}>
+                                <Panel header="toon mijn items" key="1">
+                                    {myItems &&
+                                    myItems.map((item) => (
+                                        <Listitem key={item.uid} item={item}/>
+                                    ))
+                                    }
+                                </Panel>
+                            </Collapse>
+                        </>
+                        :
+                        <p className="noneyet">Je hebt nog geen items gepost.</p>
+                        }
+                        </div>
+                    </div>
+                    <div className="profilepage_bottom">
+                        <SignOutButton />
+                    </div>
+                </div>
+                );
+        }
 }
-
 
 export default Profile;

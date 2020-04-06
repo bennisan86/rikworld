@@ -47,7 +47,7 @@ import avatardefault from '../Avatar/avatar_default.png';
             value={email}
             onChange={this.onChange}
             type="text"
-            placeholder="Email Address"
+            placeholder="Je inloggegevens (e-mail)"
           />
           <Input
             name="password"
@@ -56,7 +56,7 @@ import avatardefault from '../Avatar/avatar_default.png';
             value={password}
             onChange={this.onChange}
             type="password"
-            placeholder="Password"
+            placeholder="Je paswoord"
           />
           <Button
             size="large"

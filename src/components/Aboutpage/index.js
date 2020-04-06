@@ -1,24 +1,26 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { CloseButton } from '../Navigation';
+import FullRik from '../../svgs/FullRik';
+import { Button } from 'antd';
 
 
-class About extends Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-        };
-    }
-    componentDidMount(){
-    }
-    render(){
-
-        return (
-            <div className="">
-                    <CloseButton history={this.props.history} />
-                <h1>About page</h1>
+const About = (props) => {
+    console.log(window.scrollX);
+    return (
+        <>
+        <CloseButton history={props.history} fill="#FFEF00" />
+        <div className="aboutpage_total">
+            <FullRik />
+            <div className="aboutpage_txt">
+                <h2>Hoi!</h2>
+                <p>Ik ben Rik. Ik heb jammer genoeg maar  een heel korte tijd hier op deze wereld mogen zijn. Graag zou ik verder willen leven in jullie gedachten en leuke plekken bezoeken. <br /><br />Mag ik met jullie mee reizen? Vraag een sticker aan mijn mama en papa, trek er een leuke foto mee en plaats deze dan met een tof tekstje op de map.<br /><br />Dikke zoenen,<br /><strong>Rik</strong></p>
             </div>
-        );
-    }
+            <div className="stickers_btn">
+                <Button onClick="mailto:vandenbempt.gn@gmail.com?SUBJECT=Wij willen graag stickers aanvragen!?BODY=Wij%20willen%20graag%20stickers%20aanvragen!">stickers aanvragen</Button>
+            </div>
+        </div>
+        </>
+    );
 }
 
 

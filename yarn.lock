@@ -3088,6 +3088,11 @@ bluebird@^3.5.5:
   resolved "https://registry.yarnpkg.com/bluebird/-/bluebird-3.7.2.tgz#9f229c15be272454ffa973ace0dbee79a1b0c36f"
   integrity sha512-XpNj6GDQzdfW+r2Wnn7xiSAd7TM3jzkxGXBGTtWKuSXv1xUV+azxAm8jdWZN06QTQk+2N2XB9jRDkvbmQmcRtg==
 
+blueimp-load-image@^2.20.1:
+  version "2.26.0"
+  resolved "https://registry.yarnpkg.com/blueimp-load-image/-/blueimp-load-image-2.26.0.tgz#4cd3115f115d5ef9386b2ee15a504668987dfd05"
+  integrity sha512-pL7SYdK9ZxBFmFiEoh91PIYccU9IzytQ8goIUgc+5RW6vYVyvpGRUltefceeoNyLARbF8QXiYimHp6kgjZ/IBg==
+
 bn.js@^4.0.0, bn.js@^4.1.0, bn.js@^4.1.1, bn.js@^4.4.0:
   version "4.11.8"
   resolved "https://registry.yarnpkg.com/bn.js/-/bn.js-4.11.8.tgz#2cde09eb5ee341f484746bb0309b3253b1b1442f"
@@ -5185,6 +5190,16 @@ execa@^1.0.0:
     p-finally "^1.0.0"
     signal-exit "^3.0.0"
     strip-eof "^1.0.0"
+
+exif-js@^2.2.1:
+  version "2.3.0"
+  resolved "https://registry.yarnpkg.com/exif-js/-/exif-js-2.3.0.tgz#9d10819bf571f873813e7640241255ab9ce1a814"
+  integrity sha1-nRCBm/Vx+HOBPnZAJBJVq5zhqBQ=
+
+exif2css@^1.2.0:
+  version "1.3.0"
+  resolved "https://registry.yarnpkg.com/exif2css/-/exif2css-1.3.0.tgz#1f6c0c2ac7cc1c83da450214d4e8377c8f949660"
+  integrity sha512-RBjZaFcNumDz3bZiZGsR3Kg2jouyLuRnUPox7yE24WcvK8IhVdShAwSQHEqupGC0/DYDZsiunk+sv8CLmu4Lqg==
 
 exit@^0.1.2:
   version "0.1.2"
@@ -7671,6 +7686,13 @@ lines-and-columns@^1.1.6:
   version "1.1.6"
   resolved "https://registry.yarnpkg.com/lines-and-columns/-/lines-and-columns-1.1.6.tgz#1c00c743b433cd0a4e80758f7b64a57440d9ff00"
   integrity sha1-HADHQ7QzzQpOgHWPe2SldEDZ/wA=
+
+load-image-react@^1.0.2:
+  version "1.0.2"
+  resolved "https://registry.yarnpkg.com/load-image-react/-/load-image-react-1.0.2.tgz#4e5d5303f74e4ed6a4be9cdd029dde47660ff25d"
+  integrity sha512-dMV97Q5BSpQMZtSMNf9XFvb1Ua8hcw/bvRNpgap4XiSz59ilBnVoM4797dCh15sCZ6NpcNZuVo5xSUgtk94BtQ==
+  dependencies:
+    blueimp-load-image "^2.20.1"
 
 load-json-file@^1.0.0:
   version "1.1.0"
@@ -10849,6 +10871,14 @@ react-error-overlay@^6.0.4:
   version "6.0.4"
   resolved "https://registry.yarnpkg.com/react-error-overlay/-/react-error-overlay-6.0.4.tgz#0d165d6d27488e660bc08e57bdabaad741366f7a"
   integrity sha512-ueZzLmHltszTshDMwyfELDq8zOA803wQ1ZuzCccXa1m57k1PxSHfflPD5W9YIiTXLs0JTLzoj6o1LuM5N6zzNA==
+
+react-fix-image-orientation@^0.1.4:
+  version "0.1.4"
+  resolved "https://registry.yarnpkg.com/react-fix-image-orientation/-/react-fix-image-orientation-0.1.4.tgz#292f2a9dffb635c96301a79933c877a5280a7ea9"
+  integrity sha512-KMGyxbFrpg4j18VyUGyE5rMvOXbwzpIRbOoPrwSE6tzRkXM+/Ujtfge4HSX4exRIIcpn088FpgRadt2QnttDxg==
+  dependencies:
+    exif-js "^2.2.1"
+    exif2css "^1.2.0"
 
 react-geocode@^0.2.1:
   version "0.2.1"

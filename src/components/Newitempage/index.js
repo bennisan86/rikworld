@@ -4,7 +4,7 @@ import { AuthUserContext } from '../Session';
 import { withFirebase } from '../Firebase';
 import { CloseButton } from '../Navigation';
 import { Input, Button } from 'antd';
-import { Image, Locationpin } from '../../svgs/OtherIcons'
+import { Image, Locationpin, Delete } from '../../svgs/OtherIcons'
 import Loader from 'react-loader-spinner'
 
 class Newitem extends Component {
@@ -18,6 +18,23 @@ class Newitem extends Component {
             image: this.props.tempitem.image,
             progress: false,
         };
+    }
+
+    componentDidMount(){
+        if (this.state.date === ""){
+            let today = new Date();
+            let dd = String(today.getDate()).padStart(2, '0');
+            let mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
+            let yyyy = today.getFullYear();
+            today = yyyy + '-' + mm + '-' + dd;
+            this.setState({
+                date: today,
+            })
+            console.log('jep',today);
+
+        } else {
+            console.log('nope');
+        }
     }
 
     onCreateItem = (event, authUser) => {
@@ -139,44 +156,49 @@ class Newitem extends Component {
             };
 
         console.log('isInvalid',isInvalid, 'state',this.state);
-
         return (
             <AuthUserContext.Consumer>
                 {authUser => (
-                <div className="newitem_total">
-                    <CloseButton history={this.props.history} />
+                <>
+                    <CloseButton history={this.props.history} fill="#0073A7"/>
+                    <div className="newitem_total">
+                    <div className="newitem_img_infos">
                     {image.url ?
-                    <div>
-                        <div className="img_upload_total">
+                    <div className="uploadedtotal">
+                        <div className="img_upload_total_w_img">
                             <div className="img_upload_total_canvas">
                             <img src={image.url} alt='uploaded' />
                             </div>
                         </div>
-                        <button onClick={this.deleteUpload}>delete?</button>
+                        <Button className="deletebtn shadow" onClick={this.deleteUpload}>
+                            <Delete width={20} />
+                        </Button>
                     </div>
+                    :
+                    <div className="img_upload_total">
+                        <div className="img_upload_total_canvas">
+                        {!progress ? 
+                            <button className="img_upload_btn shadow" onClick={this.triggerClick}>
+                                <Image width={20} />
+                            </button>
                         :
-                        <div className="img_upload_total">
-                            <div className="img_upload_total_canvas">
-                            {!progress ? 
-                                <button className="img_upload_btn shadow" onClick={this.triggerClick}>
-                                    <Image width={20} />
-                                </button>
-                            :
-                                <Loader
-                                    type="Oval"
-                                    color="#0073A7"
-                                    width={50}
-                                    height={50}
-                                />
-                            }
-                            </div>
-                            <input
-                                id='selectImage'
-                                hidden="hidden"
-                                type="file"
-                                onChange={this.handleChange} />
+                            <Loader
+                                type="Oval"
+                                color="#0073A7"
+                                width={50}
+                                height={50}
+                            />
+                        }
                         </div>
+                        <input
+                            id='selectImage'
+                            hidden="hidden"
+                            type="file"
+                            onChange={this.handleChange} />
+                    </div>
                     }
+
+                    <div className="newitem_infos">
                     <Button
                     onClick={(tempdata) => this.gotoLocationdragger(tempdata)}
                     size="large"
@@ -199,17 +221,21 @@ class Newitem extends Component {
                         value={msg}
                         onChange={event => this.onChangeText(event)}
                         placeholder="Jouw bericht"/>
+
+
                     <Input
                         type="date"
                         name="date"
                         size="large"
                         value={date}
                         onChange={event => this.onChangeText(event)}
-                        placeholder="Date"/>
-                    <Button className="loginbtn" disabled={!isInvalid} onClick={event => this.onCreateItem(event, authUser)}>posten!</Button>
+                        />
                 </div>
+                </div>
+                <Button className="loginbtn" disabled={!isInvalid} onClick={event => this.onCreateItem(event, authUser)}>posten!</Button>
+                </div>
+                </>
                 )}
-
             </AuthUserContext.Consumer>
         );
     }

@@ -130,6 +130,74 @@ const Locationpin = ({
 
 
 
+const Edit = ({
+  style = {},
+  fill = "#0073A7",
+  width = "100%",
+  className = "",
+  viewBox = "0 0 21.781 21.53"
+}) => (
+  <svg
+    width={width}
+    style={style}
+    height={width}
+    viewBox={viewBox}
+    xmlns="http://www.w3.org/2000/svg"
+    className={`svg-icon ${className || ""}`}
+    xmlnsXlink="http://www.w3.org/1999/xlink"
+  >
+      <g id="Group_37" data-name="Group 37" transform="translate(-478 50.212)">
+      <g id="Group_36" data-name="Group 36" transform="translate(480.984 -50.213)">
+        <path id="Path_330" data-name="Path 330" d="M499.747-46.226l-14.8,14.8c0-.136-3.5-3.5-3.3-3.3l14.8-14.8a2.336,2.336,0,0,1,3.3,0A2.336,2.336,0,0,1,499.747-46.226Z" transform="translate(-481.633 50.213)" fill="#0073a7"/>
+      </g>
+      <path id="Path_331" data-name="Path 331" d="M479.643-30,478-25.072l4.928-1.643L479.643-30" transform="translate(0 -3.611)" fill="#0073a7"/>
+      </g>
+
+
+    </svg>
+);
+
+
+const Delete = ({
+  style = {},
+  fill = "#0073A7",
+  width = "100%",
+  className = "",
+  viewBox = "0 0 512 512"
+}) => (
+  <svg
+    width={width}
+    style={style}
+    height={width}
+    viewBox={viewBox}
+    xmlns="http://www.w3.org/2000/svg"
+    className={`svg-icon ${className || ""}`}
+    xmlnsXlink="http://www.w3.org/1999/xlink"
+  >
+    <g>
+      <g>
+        <g>
+          <polygon fill={fill} points="353.574,176.526 313.496,175.056 304.807,412.34 344.885,413.804 			"/>
+          <rect fill={fill} x="235.948" y="175.791" width="40.104" height="237.285"/>
+          <polygon fill={fill} points="207.186,412.334 198.497,175.049 158.419,176.52 167.109,413.804 			"/>
+          <path fill={fill} d="M17.379,76.867v40.104h41.789L92.32,493.706C93.229,504.059,101.899,512,112.292,512h286.74
+            c10.394,0,19.07-7.947,19.972-18.301l33.153-376.728h42.464V76.867H17.379z M380.665,471.896H130.654L99.426,116.971h312.474
+            L380.665,471.896z"/>
+        </g>
+      </g>
+    </g>
+    <g>
+      <g>
+        <path fill={fill} d="M321.504,0H190.496c-18.428,0-33.42,14.992-33.42,33.42v63.499h40.104V40.104h117.64v56.815h40.104V33.42
+          C354.924,14.992,339.932,0,321.504,0z"/>
+      </g>
+    </g>
+    </svg>
+);
+
+
+
+
 
 export default Plus;
-export { Up, Cancel, Confirm,Image,Locationpin };
+export { Up, Cancel, Confirm,Image,Locationpin,Edit,Delete };

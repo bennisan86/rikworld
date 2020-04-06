@@ -84,7 +84,7 @@ const INITIAL_STATE = {
             value={username}
             onChange={this.onChange}
             type="text"
-            placeholder="Full Name"
+            placeholder="Kies een gebruikersnaam"
           />
           <Input
             name="email"
@@ -93,7 +93,7 @@ const INITIAL_STATE = {
             value={email}
             onChange={this.onChange}
             type="text"
-            placeholder="Email Address"
+            placeholder="Geef je e-mail op"
           />
           <Input
             name="passwordOne"
@@ -102,7 +102,7 @@ const INITIAL_STATE = {
             value={passwordOne}
             onChange={this.onChange}
             type="password"
-            placeholder="Password"
+            placeholder="Kies een paswoord (min. 6 tekens)"
           />
           <Input
             name="passwordTwo"
@@ -111,7 +111,7 @@ const INITIAL_STATE = {
             value={passwordTwo}
             onChange={this.onChange}
             type="password"
-            placeholder="Confirm Password"
+            placeholder="Herhaal je paswoord"
           />
           <Button
             size="large"
