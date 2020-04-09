@@ -1,5 +1,7 @@
 @import url('https://fonts.googleapis.com/css?family=Raleway:400,700&display=swap');
 
+
+/* MIXINS */
 @mixin fullwidth {
   width: 100vw;
   height: 100vh;
@@ -22,14 +24,18 @@
   border: none;
 }
 
+
+/* COLOURS */
 $blue-base: #0073A7;
 $yellow-base: #FFEF00;
 $lightish-blue: #D1E7F2;
 
+
+
+/* GENERAL STUFF */
 html, body {
     height: auto;
 }
-
 body {
   margin: 0;
   font-family: 'Raleway', ;
@@ -40,28 +46,6 @@ body {
 }
 p, strong {
   color: black;
-}
-.ant-input {
-  font-weight: bold;
-}
-.ant-input-lg {
-  font-size: 14px;
-}
-.ant-input:focus,.ant-input:hover {
-  border: 2px solid #0072A9;
-  outline: 0;
-  -webkit-box-shadow: 0 0 0 2px rgba(87,168,233, .2);
-  box-shadow: 0 0 0 2px rgba(87,168,233, .2);
-}
-
-.ant-input:-webkit-autofill {
-  background-color: rgb(0,0,0) !important;
-  -webkit-box-shadow: inset 0 0 0px 9999px white;
-  box-shadow: inset 0 0 0px 9999px white;
-}
-.inputter {
-  margin-top: 10px;
-  padding: 24px 15px 22px;
 }
 .margbot20{
   margin-bottom: 20px;
@@ -81,8 +65,83 @@ p, strong {
 .minimarg {
   margin-bottom: 6px;
 }
+.centeredcolumn {
+  @include column;
+  justify-content: center;
+  align-items: center;
+}
+.centeredrow {
+  @include row;
+  justify-content: center;
+  align-items: center;
+}
+.centeredtxt {
+  text-align: center;
+}
+.navshadow {
+  -webkit-box-shadow: 0px 3px 6px 0px rgba(0,0,0,0.25);
+  -moz-box-shadow: 0px 3px 6px 0px rgba(0,0,0,0.25);
+  box-shadow: 0px 3px 6px 0px rgba(0,0,0,0.25);
+}
+.navshadow2 {
+  -webkit-filter: drop-shadow( 0px 3px 6px rgba(0, 0, 0, .25));
+  filter: drop-shadow( 0px 3px 6px rgba(0, 0, 0, .25));
+}
+.shadow {
+  -webkit-box-shadow: 0px 3px 6px 0px rgba(0,0,0,0.15);
+  -moz-box-shadow: 0px 3px 6px 0px rgba(0,0,0,0.15);
+  box-shadow: 0px 3px 6px 0px rgba(0,0,0,0.15);
+}
+.opac20 {
+  opacity: 0.2;
+}
+button {
+  cursor: pointer;
+}
+.textlink {
+  text-decoration: underline;
+  color: $blue-base;
+  font-weight: bold;
+  font-size: 12px;
+}
+.higher {
+  z-index: 99;
+  position: absolute;
+  bottom: 150px;
+  right: 150px;
+  background: white;
+}
+
+
+
+
+/* ANT INPUT */
+.ant-input {
+  font-weight: bold;
+}
+.ant-input-lg {
+  font-size: 14px;
+}
+.ant-input:focus,.ant-input:hover {
+  border: 2px solid #0072A9;
+  outline: 0;
+  -webkit-box-shadow: 0 0 0 2px rgba(87,168,233, .2);
+  box-shadow: 0 0 0 2px rgba(87,168,233, .2);
+}
+.ant-input:-webkit-autofill {
+  background-color: rgb(0,0,0) !important;
+  -webkit-box-shadow: inset 0 0 0px 9999px white;
+  box-shadow: inset 0 0 0px 9999px white;
+}
+.inputter {
+  margin-top: 10px;
+  padding: 24px 15px 22px;
+}
+
+
+
+/* MAP/LIST */
 .map_canvas {
-  // @include fullwidth;
   width: 100vw;
   background-color: #FAFAFA;
 }
@@ -91,11 +150,9 @@ p, strong {
   height: 100vh;
   margin-top: -172px;
 }
-
 .list_canvas {
   background-color: darkgrey;
 }
-
 .overlay {
   @include fullwidth;
   @include column;
@@ -110,7 +167,6 @@ p, strong {
   top: 0;
   left: 0;
 }
-
 .useroverlay {
   @include box;
   width: 85vw;
@@ -121,19 +177,9 @@ p, strong {
   border-radius: 10px;
   margin-top: -50px;
 }
-.centeredcolumn {
-  @include column;
-  justify-content: center;
-  align-items: center;
-}
-.centeredrow {
-  @include row;
-  justify-content: center;
-  align-items: center;
-}
-.centeredtxt {
-  text-align: center;
-}
+
+
+/* NAV */
 .top_navigation {
   @include box;
   @include row;
@@ -149,28 +195,6 @@ p, strong {
   left: 0;
   margin: 0;
 }
-
-
-.navshadow {
-  -webkit-box-shadow: 0px 3px 6px 0px rgba(0,0,0,0.25);
-  -moz-box-shadow: 0px 3px 6px 0px rgba(0,0,0,0.25);
-  box-shadow: 0px 3px 6px 0px rgba(0,0,0,0.25);
-}
-
-.navshadow2 {
-  -webkit-filter: drop-shadow( 0px 3px 6px rgba(0, 0, 0, .25));
-  filter: drop-shadow( 0px 3px 6px rgba(0, 0, 0, .25));
-}
-
-
-.shadow {
-  -webkit-box-shadow: 0px 3px 6px 0px rgba(0,0,0,0.15);
-  -moz-box-shadow: 0px 3px 6px 0px rgba(0,0,0,0.15);
-  box-shadow: 0px 3px 6px 0px rgba(0,0,0,0.15);
-}
-
-
-
 .toggleswitch {
   @include row;
   transition: all 0.01s ease-in-out;
@@ -180,7 +204,6 @@ p, strong {
   border-radius: 26px;
   margin: 0 0 6px 0;
 }
-
 .toggleswitch_part_right {
   @include box;
   @include row;
@@ -192,7 +215,6 @@ p, strong {
   border-right: 1px #CCCCCC dashed;
   align-items: center;
   justify-content: flex-end;
-
 }
 .toggleswitch_part_left {
   @include box;
@@ -208,14 +230,14 @@ p, strong {
 .toggleswitch:active {
   transform: scale(0.99);
 }
-.opac20 {
-  opacity: 0.2;
-}
+
+
+
+/* BTN SPECIFICS */
 .loginbtn {
   color: black;
   width: 100%;
   max-width: 400px;
-
   padding: 18px 0 16px;
   height: auto;
   background: $yellow-base;
@@ -223,7 +245,6 @@ p, strong {
   font-weight: bold;
   margin: 30px 0 0 0;
 }
-
 .logoutbtn {
   color: black;
   width: 100%;
@@ -250,12 +271,14 @@ p, strong {
 .newbtn_navigation_container {
   position: sticky;
   position: -webkit-sticky;
-  top: 560px;
-  z-index: 100;
-  height: 64px;
   width: 100%;
+  height: 64px;
   @include box;
-  padding-left: 75%;
+  @include row;
+  justify-content: flex-end;
+  padding: 0px 30px 0 30px;
+  top: 70vh;
+  z-index: 100;
 }
 .newbtn_navigation {
   @include clearbtn;
@@ -284,17 +307,27 @@ p, strong {
   width: 56px;
 }
 
-.closebtn_navigation {
-  @include clearbtn;
+.closebtn_navigation_container {
   position: sticky;
   position: -webkit-sticky;
-  top: 24px;
-  left: 86vw;
-  // right: 10vw;
+  width: 100%;
+  height: 70px;
+  @include box;
+  @include row;
+  align-items: flex-end;
+  justify-content: flex-end;
+  padding: 0px 20px 0 20px;
+  top: 0;
+  z-index: 100;
+}
+.closebtn_navigation_container button {
+  @include clearbtn;
   z-index: 10;
 }
 
 
+
+/* PROFILE */
 .profilepage_total {
   @include column;
   @include box;
@@ -304,6 +337,7 @@ p, strong {
   justify-content: center;
   align-items: center;
   padding: 0;
+  margin: -70px 0 0 0;
 }
 
 .profilepage_top {
@@ -346,7 +380,6 @@ p, strong {
 .ant-collapse-borderless > .ant-collapse-item {
   border: none;
 }
-
 .profilepage_useritems {
   @include box;
   width: 100%;
@@ -360,15 +393,12 @@ p, strong {
   color:#999999;
   margin: 0;
 }
-
 .ant-collapse-item {
   @include column;
   justify-content: center;
   align-items: center;
   background-color: white;
 }
-
-
 .profilepage_bottom {
   @include column;
   @include box;
@@ -382,19 +412,21 @@ p, strong {
   background-color: #F5F5F5;
 }
 
+
+
+/* ABOUT */
 .aboutpage_total {
   @include column;
   @include box;
   width: 100%;
   min-height: 100vh;
-  // overflow-x: scroll;
+  overflow-x: scroll;
   justify-content: flex-start;
   align-items: center;
-  padding: 80px 20px 50px 20px;
+  padding: 80px 20px 35vh 20px;
   background: url(./imgs/Rikworld_navbg.png) repeat;
-  margin-top: -29px;
+  margin: -124px 0 0 0;
 }
-
 .aboutpage_txt {
   text-align: center;
   background-color: #00577E;
@@ -402,14 +434,12 @@ p, strong {
   padding: 35px 10vw 35px 10vw;
   margin: 50px 0 0 0;
 }
-
 .aboutpage_txt h2 {
   color: $yellow-base;
   margin: 0 0 15px 0;
   font-size: 24px;
   font-weight: 700;
 }
-
 .aboutpage_txt p, .aboutpage_txt strong {
   color: white;
 }
@@ -422,7 +452,7 @@ p, strong {
 .stickers_btn {
   position: -webkit-sticky;
   position: sticky;
-  top: 100px;
+  top: 72vh;
   left: 0px;
   width: 100%;
   height: 54px;
@@ -430,7 +460,6 @@ p, strong {
   align-items: center;
   justify-content: center;
 }
-
 .stickers_btn button {
   @include clearbtn;
   color: black;
@@ -442,18 +471,18 @@ p, strong {
   border: none;
   font-weight: bold;
   margin: 0;
-
 }
+
+/* NEWITEM */
 .newitem_total {
   @include column;
   @include box;
   width: 100%;
   justify-content: flex-start;
-  align-items: flex-end;
+  align-items: center;
   padding: 12vh 50px 50px 50px;
+  margin-top: -70px;
 }
-
-
 .newitem_img_infos {
   @include column;
   @include box;
@@ -463,11 +492,9 @@ p, strong {
   align-items: flex-start;
   padding: 0;
 }
-
 .newitem_img_infos input {
   margin: 15px 0;
 }
-
 .newitem_img_infos .ant-btn-lg {
   @include clearbtn;
   width: 100%;
@@ -476,11 +503,9 @@ p, strong {
   margin: 30px 0 30px 0;
   height: auto;
 }
-
 .newitem_infos {
   width: 100%;
 }
-
 .img_upload_total {
   @include column;
   @include box;
@@ -493,7 +518,6 @@ p, strong {
   margin: 0;
   padding: 8px;
 }
-
 .img_upload_total_w_img {
   @include column;
   @include box;
@@ -506,7 +530,6 @@ p, strong {
   margin: 0;
   padding: 8px;
 }
-
 .img_upload_total_canvas {
   @include column;
   @include box;
@@ -518,12 +541,9 @@ p, strong {
   image-orientation: none;
   image-orientation: from-image;
 }
-
 .img_upload_total_canvas img {
   width: 100%;
 }
-
-
 .img_upload_btn {
   @include clearbtn;
   z-index: 2;
@@ -534,51 +554,50 @@ p, strong {
 }
 
 
-button {
-  cursor: pointer;
-}
 
-.textlink {
-  text-decoration: underline;
-  color: $blue-base;
-  font-weight: bold;
-  font-size: 12px;
-}
-
-.higher {
-  z-index: 99;
-  position: absolute;
-  bottom: 150px;
-  right: 150px;
-  background: white;
-}
-
-
+/* INNERBOX */
 .innerBox {
   width: 300px;
   max-height: 475px;
   overflow-y: scroll;
 }
-
-
 .innerBox_top {
   @include row;
   @include box;
-  padding: 15px 20px;
+  padding: 20px 35px 15px 20px;
   align-items: center;
-  justify-content: center;
+  justify-content: flex-start;
 }
 .innerBox_avatar {
   @include row;
   align-items: center;
-  justify-content: center;
+  justify-content: flex-start;
+  flex: 1;
 }
 
 .innerBox_avatar p {
   font-size: 14px;
   font-weight: 700;
   text-align: right;
-  margin: 0 8px 0 0;
+  margin: 0 0 0 8px;
+}
+
+.innerBox_below p {
+  width: 100%;
+  margin-bottom: 10px;
+}
+.innerBox_below h5 {
+  font-weight: 700;
+  color: #CDCDCD;
+  margin: 0;
+}
+
+.innerBox_top h5 {
+  font-weight: normal;
+  margin: 0;
+  font-size: 14px;
+  line-height: 1.5em;
+  color: #616161;
 }
 
 .innerBox_location {
@@ -588,10 +607,8 @@ button {
   flex: 1;
 }
 .innerBox_location_latlong {
-  margin: 0 0 2px 4px;
+  margin: 0 0 0 6px;
 }
-
-
 .innerBox_location_latlong p {
   font-size: 14px;
   font-weight: bold;
@@ -600,14 +617,11 @@ button {
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
-  max-width: 42px;
   margin: 0;
 }
-
 .innerBox_img {
   width: 100%;
 }
-
 .innerBox_below {
   @include column;
   @include box;
@@ -615,47 +629,74 @@ button {
   align-items: flex-start;
   justify-content: flex-start;
 }
+.mapitem .innerBox_location {
+  @include box;
+  padding: 20px;
+  background: #f7f7f7;
+  border-radius: 0 0 10px 10px;
+}
+.mapitem .innerBox_location {
+  align-items: flex-start;
+}
+.mapitem .innerBox_location_latlong p {
+  font-size: 0.85em;
+  line-height: 1.5em;
+  font-weight: normal;
+  text-decoration: none;
+  color: #878787;
+  white-space: nowrap;
+  overflow: show;
+  text-overflow: unset;
+  max-width: 100%;
+  margin: 0;
+}
+.mapitem .innerBox_location svg {
+  margin: 3px 4px 0 0px;
+}
+.listitem .innerBox_location {
+  @include box;
+  width: 100%;
+  border-top: 1px dotted $blue-base;
+  padding: 20px 0 30px 0;
+  justify-content: center;
+}
+.listitem .innerBox_location:hover, .listitem .innerBox_location a:hover, .listitem .innerBox_location svg:hover {
+  cursor: pointer;
+}
 .listitem .innerBox_below {
   @include column;
   @include box;
-  padding: 0 20px 20px 20px;
+  padding: 0 20px 10px 20px;
   align-items: flex-start;
   justify-content: flex-start;
 } 
-.innerBox_below p {
-  width: 100%;
-  margin-bottom: 10px;
-}
-.innerBox_below h5 {
-  width: 100%;
-  font-weight: 700;
-  color: #CDCDCD;
-}
 
 
+
+/* LOCATION DRAGGER */
 .locationdragger_total {
   @include column;
   justify-content: center;
-  align-items: center;
+  align-items: flex-start;
 }
 .pointer {
-  width: 10px;
-  height: 10px;
+  width: 20px;
+  height: 20px;
+  margin: -6px 0 0 -3px;
   border-radius: 50%;
   left: 50vw;
-  top:30vh;
-  background: red;
+  top: 38vh;
+  background: white;
+  border: 4px solid $yellow-base;
   z-index: 99;
   position: absolute;  
 }
-
 .locatie_aanduiden_btn {
   @include row;
   justify-content: center;
   align-items: center;
   width: 200px;
 }
-
 .locatie_aanduiden_btn p {
   font-size: 14px;
   font-weight: bold;
@@ -665,9 +706,7 @@ button {
 }
 .locatie_aanduiden_btn_latlong {
   margin: 0 0 0 6px;
-
 }
-
 .locatie_aanduiden_btn_latlong p {
   font-size: 14px;
   font-weight: bold;
@@ -679,34 +718,39 @@ button {
   max-width: 80px;
   margin: 0;
 }
-
-.findmyloc {
+.adressfinder {
+  @include box;
+  @include row;
+  justify-content: flex-start;
+  align-items: flex-end;
+  padding: 25px 30px 0 30px;
+  position: absolute;
+  top: 20px;
+  z-index: 99;
+  width: 80%;
+}
+.adressfinder button {
   @include clearbtn;
   @include box;
-
   color: black;
-  width: 260px;
-  padding: 18px 0 16px;
+  padding: 10px 16px;
   height: auto;
   background: $yellow-base;
   border: none;
   font-weight: bold;
-  margin: 30px 0 0 0;
-  position: absolute;
-  top: 20px;
-  z-index: 99;
+  margin: 0;
   max-width: 400px;
-
 }
 .locationdragger_bottom {
   @include column;
   @include box;
   justify-content: center;
   align-items: center;
-  padding: 24px 10vw;
+  padding: 0 10vw;
   width: 100%;
+  margin-top: -15px;
+  z-index: 99;
 }
-
 .locationdragger_bottom p {
   font-size: 14px;
   color: #CDCDCD;
@@ -714,7 +758,12 @@ button {
 }
 .react-geocoder {
   width: 100%;
-  margin-bottom: 40px;
+  margin-bottom: 0px;
+}
+.react-geocoder-results {
+  @include box;
+  padding: 8px 10px;
+  background-color: white;
 }
 .react-geocoder input {
   @include box;
@@ -735,7 +784,7 @@ button {
 
 
 
-
+/* LIST SPECIFICS*/
 .list {
   width: 100%;
   @include box;
@@ -744,10 +793,7 @@ button {
   justify-content: flex-start;
   align-items: center;
   margin-top: -172px;
-  // columns: 2;
 }
-
-
 .listitem {
   overflow: hidden;
   break-inside: avoid;
@@ -760,8 +806,7 @@ button {
   -webkit-box-shadow: 0px 1px 2px 0px rgba(0,0,0,0.10);
   -moz-box-shadow: 0px 1px 2px 0px rgba(0,0,0,0.10);
   box-shadow: 0px 1px 2px 0px rgba(0,0,0,0.10);
-  margin: 5px;
-  // padding: 20px;
+  margin: 5px 5px 15px 5px;
 }
 
 .avatarimg {
@@ -929,6 +974,7 @@ button {
 
 .mapboxgl-popup {
   top:-50px;
+  z-index: 99;
 }
 
 .mapboxgl-popup-content {
@@ -937,13 +983,22 @@ button {
 }
 
 .mapboxgl-popup-close-button {
-  opacity: 0;
+  font-size: 2em;
+  width: 30px;
+  height: 30px;
+  line-height: normal;
 }
 
 
 
+.mapboxgl-popup-close-button button {
+  width: 30px;
+  height: 30px;
+}
 
 
+
+/*
 
 @media (min-width: 1281px) {
   .newbtn_navigation {
@@ -1027,4 +1082,15 @@ button {
   }
 
 
+}
+*/
+
+
+
+/* NEW RESPONSIVENESS */
+
+@media screen and ( min-height: 1000px ), ( min-width: 700px ) {
+  .newbtn_navigation_container {
+    top: 78vh;
+  }
 }

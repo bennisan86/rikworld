@@ -17,10 +17,10 @@ const FullRik = ({
     xmlnsXlink="http://www.w3.org/1999/xlink"
   >
  <defs>
-    <clipPath id="clip-path">
+    <clipPath>
       <rect id="Rectangle_51" data-name="Rectangle 51" width="74.87" height="98.35" transform="translate(25.39 91.49)"/>
     </clipPath>
-    <clipPath id="clip-path-2">
+    <clipPath>
       <rect id="Rectangle_52" data-name="Rectangle 52" width="74.87" height="98.35" transform="translate(98.17 91.49)"/>
     </clipPath>
   </defs>
@@ -61,14 +61,14 @@ const FullRik = ({
   <path id="Path_312" data-name="Path 312" d="M99.21,100.24l49.96-12.28s14.05-5.8,20.08,2.13.9,14.84-3.27,19.97a69.841,69.841,0,0,0-7.18,11.13v41.23s1.85,26.37-26.37,26.37H99.21Z" fill="#ffe900"/>
   <g id="Group_29" data-name="Group 29" opacity="0.1">
     <g id="Group_28" data-name="Group 28">
-      <g id="Group_27" data-name="Group 27" clip-path="url(#clip-path)">
+      <g id="Group_27" data-name="Group 27">
         <path id="Path_313" data-name="Path 313" d="M99.21,188.78v-3.89H65.99c-22.87,0-21.68-21.37-21.68-21.37V126.7c0-3.27,0-6.83-1.19-8.61s-10.99-11-14.13-15.44c-1.95-2.76-1.76-8.06-1.33-10.11-3.43,6.91,1.05,12.93,4.78,17.52a69.841,69.841,0,0,1,7.18,11.13v41.22s-1.85,26.37,26.37,26.37Z"/>
       </g>
     </g>
   </g>
   <g id="Group_32" data-name="Group 32" opacity="0.1">
     <g id="Group_31" data-name="Group 31">
-      <g id="Group_30" data-name="Group 30" clip-path="url(#clip-path-2)">
+      <g id="Group_30" data-name="Group 30">
         <path id="Path_314" data-name="Path 314" d="M99.21,188.78v-3.89h33.23c22.87,0,21.68-21.37,21.68-21.37V126.7c0-3.27,0-6.83,1.19-8.61s10.99-11,14.12-15.44c1.95-2.76,1.76-8.06,1.33-10.11,3.44,6.91-1.05,12.93-4.78,17.52a69.841,69.841,0,0,0-7.18,11.13v41.22s1.85,26.37-26.37,26.37Z"/>
       </g>
     </g>

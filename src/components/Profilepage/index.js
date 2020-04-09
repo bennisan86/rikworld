@@ -37,8 +37,9 @@ const Profile = (props) => {
     switch(currentView) {
         case 'editinfo':
           return (
+                <>
+                <CloseButton history={props.history} fill="#0073A7" />
                 <div className="profilepage_total">
-                    <CloseButton history={props.history} fill="#0073A7" />
                     <div className="profilepage_top">
                         {user ?
                         <>
@@ -104,11 +105,13 @@ const Profile = (props) => {
                         <SignOutButton disabled={true} mrg="jooo" />
                     </div>
                 </div>
+                </>
             );
         default:
             return (
+                <>
+                <CloseButton history={props.history} fill="#0073A7" />
                 <div className="profilepage_total">
-                    <CloseButton history={props.history} fill="#0073A7" />
                     <div className="profilepage_top">
                         {user ?
                         <>
@@ -157,6 +160,7 @@ const Profile = (props) => {
                         <SignOutButton />
                     </div>
                 </div>
+                </>
                 );
         }
 }

@@ -50,7 +50,8 @@ const NewButton = (props) => {
     const buttonStyle = "newbtn_navigation navshadow " + props.buttonStyle;
     return(
     <div className="newbtn_navigation_container">
-    <button className={buttonStyle}><Link to={ROUTES.NEWITEM}><Plus width={28}/></Link></button>
+        <div className="flexer"></div>
+        <button className={buttonStyle}><Link to={ROUTES.NEWITEM}><Plus width={28}/></Link></button>
     </div>
     )
 };
@@ -58,9 +59,11 @@ const NewButton = (props) => {
 
 const CloseButton = (props) => { 
     return(
-    <button className="closebtn_navigation" onClick={() => props.history.push(ROUTES.HOME)}>
-        <Cancel width={20} fill={props.fill} />
-    </button>
+        <div className="closebtn_navigation_container">
+            <button onClick={() => props.history.push(ROUTES.HOME)}>
+                <Cancel width={20} fill={props.fill} />
+            </button>
+        </div>
     )
 };
 

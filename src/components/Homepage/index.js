@@ -18,36 +18,39 @@ const geolocateStyle = {
     margin: '5px',
   };
 
-const Mediaitem = (media) => {
-    console.log("mmmmedia",media);
-    return(
-        <div>mmmmedia</div>
-    );
+// const Mediaitem = (media) => {
+//     console.log("mmmmedia",media);
+//     return(
+//         <>
+//         <div>Komtiiee: {media}</div>
+//         <img className="innerBox_img" src={media} alt='item post' />
+//         </>
+//     );
     
-};
+// };
 
-  const Listitem = (i) => {
-      const item = i.item;
+  const Listitem = (props) => {
+      const item = props.item;
+
     return(
     <div className="listitem shadow">
-        <Mediaitem media={item.image}/>
-        {/* <img className="innerBox_img" src={item.image.url} alt='item post' /> */}
+        {/* <Mediaitem media={item.image.url}/> */}
+        <img className="innerBox_img" src={item.image.url} alt='item post' />
         <div className="innerBox_top">
-            <div className="innerBox_location">
-                <Locationpin width={16} />
-                <div className="innerBox_location_latlong centeredrow">
-                    <p>{item.long}</p><p> - </p><p>{item.lat}</p>
-                </div>
-            </div>
             <div className="innerBox_avatar">
-                <p className="otherusername">{item.user.username}</p>  
                 <Avatar view="otheruser" otheruser={item.user.avatar} className={'useravatar'} />
+                <p className="otherusername">{item.user.username}</p>  
             </div>
+            <h5>{item.date}</h5>
         </div>
-
         <div className="innerBox_below">
             <p>{item.msg}</p>
-            <h5>{item.date}</h5>
+        </div>
+        <div className="innerBox_location" onClick={props.onClick}>
+            <Locationpin width={16} />
+            <div className="innerBox_location_latlong centeredrow">
+                <p>toon op map</p>
+            </div>
         </div>
     </div>
     );
@@ -58,46 +61,54 @@ const Mediaitem = (media) => {
 const Homepage = (props) => {
     const [showOverlay, toggleShowOverlay] = useState(false);
     const [buttonStyle, setButtonstyle] = useState('nowyouseeme');
+
+    const [currentItem, setCurrentItem] = useState(null);
+
     const maplist = props.maplist;
     const itemsList = props.itemsList;
 
+    const showItemOnMap = (item) => {
+        props.toggleMaplist(maplist);
+        setCurrentItem(item);
+    }
     useEffect(() => {
-        // setMyItems(props.myItemsList);
         if(props.currentuser !== null) {
             setButtonstyle('nowyouseeme');
         } else {
             setButtonstyle('nowyoudont');
         }
     },[props.currentuser]);
-
-    // const clickedController = () => {
-    //     document.querySelector('[title="Geolocate"]').click();
-    //   };
     window.scrollTo(0, 0);
     return (
             <div className="map_canvas">
                 <>
-                {
-                showOverlay && 
-                <div className="overlay">
-                     <Useroverlay currentuser={props.currentuser} onOuterClick={() => toggleShowOverlay(false)}/>
-                </div>
-                }
+                    {
+                    showOverlay && 
+                    <div className="overlay">
+                        <Useroverlay currentuser={props.currentuser} onOuterClick={() => toggleShowOverlay(false)}/>
+                    </div>
+                    }
                 </>
                 <Navigation currentuser={props.currentuser} onClick={() => toggleShowOverlay(true)} toggleMaplist={(maplist) => props.toggleMaplist(maplist)} maplist={maplist}/>
                 <NewButton buttonStyle={buttonStyle} />
-
-
+                
                 {props.maplist && 
-                <Map itemsList={itemsList} />}
+                    <Map
+                        itemsList={itemsList}
+                        currentItem={currentItem}
+                        />
+                }
                 {!props.maplist && 
-                <div className="list">
-                    {itemsList &&
-                    itemsList.map((item) => (
-                        <Listitem key={item.uid} item={item}/>
-                    ))
-                    }
-                </div>
+                    <div className="list">
+                        {itemsList &&
+                        itemsList.map((item) => (
+                            <Listitem
+                                key={item.uid}
+                                item={item}
+                                onClick={() => showItemOnMap(item)}/>
+                        ))
+                        }
+                    </div>
                 }
             </div>
         );
@@ -116,6 +127,17 @@ const Homepage = (props) => {
         const [selectedItem, setSelectedItem] = useState(null);
         const [markPos, setMarkpos] = useState('markpos40');
         const [markSize, setMarksize] = useState(44);
+
+        useEffect(() => {
+            if(props.currentItem !== null) {
+                console.log("in map::", props.currentItem);
+                setSelectedItem(props.currentItem);
+                setAlteredViewport(props.currentItem,viewport);
+            } else {
+                console.log("in map is null");
+            }
+        },[]);
+
 
         const setAlteredViewport = (item,viewport) => {
             if (viewport.zoom > 17){
@@ -389,26 +411,29 @@ const Homepage = (props) => {
             longitude={selectedItem.long}
             captureScroll={true}
             anchor="top"
-            onClose={() => {
+            onClose={(e) => {
             setSelectedItem(null);
             }}>
-            <div className="innerBox">
+            <div className="innerBox mapitem">
                 <div className="innerBox_top">
-                    <div className="innerBox_location">
-                        <Locationpin width={16} />
-                        <div className="innerBox_location_latlong centeredrow">
-                            <p>{selectedItem.long}</p><p> - </p><p>{selectedItem.lat}</p>
-                        </div>
-                    </div>
                     <div className="innerBox_avatar">
-                        <p className="otherusername">{selectedItem.user.username}</p>  
                         <Avatar view="otheruser" otheruser={selectedItem.user.avatar} className={'useravatar'} />
+                        <p className="otherusername">{selectedItem.user.username}</p>  
                     </div>
+                    <h5>{selectedItem.date}</h5>
                 </div>
-                {/* <img className="innerBox_img" src={selectedItem.image.url} alt='item post' /> */}
+                {/* <Mediaitem media={selectedItem.image.url}/> */}
+
+                <img className="innerBox_img" src={selectedItem.image.url} alt='item post' />
                 <div className="innerBox_below">
                     <p>{selectedItem.msg}</p>
-                    <h5>{selectedItem.date}</h5>
+                </div>
+                <div className="innerBox_location">
+                    <Locationpin width={14} fill="#878787" />
+                    <div className="innerBox_location_latlong">
+                        <p>{selectedItem.long}°</p>
+                        <p>{selectedItem.lat}°</p>
+                    </div>
                 </div>
             </div>
             </Popup>

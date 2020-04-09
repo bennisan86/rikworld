@@ -7,11 +7,11 @@ import { Button } from 'antd';
 import { Cancel, Confirm } from '../../svgs/OtherIcons'
 
 const geolocateStyle = {
-    top: '120px',
+    top: '50px',
     right: '35px',
     position: 'absolute',
     margin: '5px',
-    opacity: '0'
+    opacity: '1'
   };
 
 
@@ -20,14 +20,10 @@ const Locationdragger = (props) => {
         latitude: 51.209800,
         longitude: 4.472290,
         width: '100vw',
-        height: '60vh',
+        height: '75vh',
         zoom: 12
     })
-
-    const clickedController = () => {
-        document.querySelector('[title="Geolocate"]').click();
-        console.log('clickerd');
-      };
+    const [adressInput, showAdressInput] = useState(false);
 
     const cancelThis = () => {
     props.history.push(ROUTES.NEWITEM);
@@ -46,9 +42,6 @@ const Locationdragger = (props) => {
         );
         props.history.push(ROUTES.NEWITEM);
     };
-    const queryParams = {
-        country: 'be'
-    }
 
     const onSelected = (viewport, item) => {
         setViewport(viewport);
@@ -58,15 +51,34 @@ const Locationdragger = (props) => {
 
     return (
         <div className="locationdragger_total">
-            <Button
-                className="findmyloc shadow"
-                onClick={() => clickedController()}>mijn huidige locatie tonen</Button>
+
             <ReactMapGL
                 {...viewport}
                 mapboxApiAccessToken={process.env.REACT_APP_MAPBOX_TOKEN}
                 mapStyle="mapbox://styles/bennisan86/ck5z4fzh61v6v1ilhbx39414i"
                 onViewportChange={viewport => setViewport(viewport)}>
-            <div className="pointer"></div>
+
+                <div className="adressfinder">
+                    {adressInput ? 
+                        <Geocoder
+                            mapboxApiAccessToken={process.env.REACT_APP_MAPBOX_TOKEN}
+                            viewport={viewport}
+                            initialInputValue={""}
+                            placeholder="Geef een adres in"
+                            onSelected={(viewport, item) => onSelected(viewport, item)}
+                            // queryParams={queryParams}
+                            />
+                    :    
+                        <Button
+                            className="shadow"
+                            onClick={() => showAdressInput(true)}> een adres opzoeken
+                        </Button>
+                    }
+
+                </div>
+
+            <div className="pointer navshadow">
+            </div>
             <GeolocateControl
                     style={geolocateStyle}
                     positionOptions={{enableHighAccuracy: true}}
@@ -77,7 +89,7 @@ const Locationdragger = (props) => {
 
             </ReactMapGL>
             <div className="locationdragger_bottom">
-                <p>Sleep de map of geef een adres in.</p>
+                {/* <p>Sleep de map of geef een adres in.</p>
             <Geocoder       
                 mapboxApiAccessToken={process.env.REACT_APP_MAPBOX_TOKEN}
                 viewport={viewport}
@@ -86,7 +98,7 @@ const Locationdragger = (props) => {
                 onSelected={(viewport, item) => onSelected(viewport, item)}
                 hideOnSelect={true}
                 queryParams={queryParams}
-            />
+            /> */}
 
                 <div className="centeredrow">
                     <button className="avatar_cc_btn shadow" onClick={() => cancelThis()}>

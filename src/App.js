@@ -71,7 +71,6 @@ class App extends Component {
   setMyItems(){
     if(this.state.itemsList && this.state.currentuserid){
     const myitems = this.state.itemsList.filter((key) => key.userId === this.state.currentuserid);
-    console.log("myitems in f:",myitems);
       this.setState({
         myItemsList:myitems,
       });
