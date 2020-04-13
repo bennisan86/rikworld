@@ -16,6 +16,7 @@ class Newitem extends Component {
             lat: this.props.tempitem.lat,
             long: this.props.tempitem.long,
             image: this.props.tempitem.image,
+            showerror: false,
             progress: false,
         };
     }
@@ -30,12 +31,9 @@ class Newitem extends Component {
             this.setState({
                 date: today,
             })
-            console.log('jep',today);
-
-        } else {
-            console.log('nope');
         }
     }
+
 
     onCreateItem = (event, authUser) => {
 
@@ -97,30 +95,42 @@ class Newitem extends Component {
         }
     }
 
-    handleUpload = (image) => {        
-        const uploadTask = this.props.firebase.strg.ref(`itempics/${image.name}`).put(image);
-        uploadTask.on('state_changed', 
-        (snapshot) => {
-            console.log('this is progress!',snapshot);
-            this.setState({ 
-                progress: true
-            });
-        },
-        (error) => {
-            console.log(error);
-        },
-        () => {
-            this.props.firebase.strg.ref(`itempics/`).child(image.name).getDownloadURL().then(url => {
-                console.log(url);
+    isFileImage(file) {
+        return file && file['type'].split('/')[0] === 'image';
+    }
+
+    handleUpload = (image) => {
+        if(this.isFileImage(image)){
+            const uploadTask = this.props.firebase.strg.ref(`itempics/${image.name}`).put(image);
+            uploadTask.on('state_changed', 
+            (snapshot) => {
+                console.log('this is progress!',snapshot);
                 this.setState({ 
-                    progress: false,
-                    image: {
-                        image: image,
-                        url: url
-                    }
+                    showerror: false,
+                    progress: true
+                });
+            },
+            (error) => {
+                console.log(error);
+            },
+            () => {
+                this.props.firebase.strg.ref(`itempics/`).child(image.name).getDownloadURL().then(url => {
+                    console.log(url);
+                    this.setState({
+                        showerror: false, 
+                        progress: false,
+                        image: {
+                            image: image,
+                            url: url
+                        }
+                    });
                 });
             });
-        });
+        } else {
+            this.setState({ 
+                showerror: true,
+            });
+        }
     }
 
     deleteUpload = () => {
@@ -163,41 +173,45 @@ class Newitem extends Component {
                     <CloseButton history={this.props.history} fill="#0073A7"/>
                     <div className="newitem_total">
                     <div className="newitem_img_infos">
-                    {image.url ?
-                    <div className="uploadedtotal">
-                        <div className="img_upload_total_w_img">
-                            <div className="img_upload_total_canvas">
-                            <img src={image.url} alt='uploaded' />
+                    <div className="centeredcolumn">
+                        {image.url ?
+                        <div className="uploadedtotal">
+                            <div className="img_upload_total_w_img">
+                                <div className="img_upload_total_canvas">
+                                <img src={image.url} alt='uploaded' />
+                                </div>
                             </div>
+                            <Button className="deletebtn shadow" onClick={this.deleteUpload}>
+                                <Delete width={20} />
+                            </Button>
                         </div>
-                        <Button className="deletebtn shadow" onClick={this.deleteUpload}>
-                            <Delete width={20} />
-                        </Button>
-                    </div>
-                    :
-                    <div className="img_upload_total">
-                        <div className="img_upload_total_canvas">
-                        {!progress ? 
-                            <button className="img_upload_btn shadow" onClick={this.triggerClick}>
-                                <Image width={20} />
-                            </button>
                         :
-                            <Loader
-                                type="Oval"
-                                color="#0073A7"
-                                width={50}
-                                height={50}
-                            />
-                        }
+                        <div className="img_upload_total">
+                            <div className="img_upload_total_canvas">
+                            {!progress ? 
+                                <button className="img_upload_btn shadow" onClick={this.triggerClick}>
+                                    <Image width={20} />
+                                </button>
+                            :
+                                <Loader
+                                    type="Oval"
+                                    color="#0073A7"
+                                    width={50}
+                                    height={50}
+                                />
+                            }
+                            </div>
+                            <input
+                                id='selectImage'
+                                hidden="hidden"
+                                type="file"
+                                onChange={this.handleChange} />
                         </div>
-                        <input
-                            id='selectImage'
-                            hidden="hidden"
-                            type="file"
-                            onChange={this.handleChange} />
+                        }
+                        {this.state.showerror &&
+                        <div className="errormsg"><p>Oeps! Je kan enkel foto's opladen...</p></div>}
                     </div>
-                    }
-
+                    
                     <div className="newitem_infos">
                     <Button
                     onClick={(tempdata) => this.gotoLocationdragger(tempdata)}
@@ -230,9 +244,10 @@ class Newitem extends Component {
                         value={date}
                         onChange={event => this.onChangeText(event)}
                         />
-                </div>
-                </div>
                 <Button className="loginbtn" disabled={!isInvalid} onClick={event => this.onCreateItem(event, authUser)}>posten!</Button>
+                </div>
+                </div>
+
                 </div>
                 </>
                 )}

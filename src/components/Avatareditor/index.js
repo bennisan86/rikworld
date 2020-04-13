@@ -10,12 +10,12 @@ class Avatareditor extends React.Component {
     image: this.props.image,
     allowZoomOut: false,
     position: { x: 0.5, y: 0.5},
-    scale: 2,
+    scale: 1,
     rotate: 0,
     borderRadius: 50,
     preview: null,
-    width: 80,
-    height: 80,
+    width: 100,
+    height: 100,
     newimg: '',
     currentv: true,
     classerzzzz: 'avatar_total'
@@ -38,7 +38,7 @@ class Avatareditor extends React.Component {
 
   onClickSave = () => {
     if (this.editor) {
-      const canvasScaled = this.editor.getImageScaledToCanvas()
+      const canvasScaled = this.editor.getImageScaledToCanvas();
       const newimg = new Image();
       newimg.id = "pic";
       newimg.src = canvasScaled.toDataURL();
@@ -108,7 +108,7 @@ class Avatareditor extends React.Component {
               position={this.state.position}
               onPositionChange={this.handlePositionChange}
               rotate={parseFloat(this.state.rotate)}
-              borderRadius={this.state.width / (100 / this.state.borderRadius)}
+              borderRadius={this.state.width / (20 / this.state.borderRadius)}
               image={this.state.image}
               className="editor-canvas"
             />
@@ -118,7 +118,7 @@ class Avatareditor extends React.Component {
             name="scale"
             tooltipVisible={false}
             onChange={this.handleScale}
-            min={1}
+            min={0.1}
             max={5}
             step={0.01}
             defaultValue={0}

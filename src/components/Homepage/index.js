@@ -1,4 +1,4 @@
-import React, { useState,useEffect } from 'react';
+import React, { useState,useEffect, Component } from 'react';
 import Useroverlay from '../Useroverlay';
 import Navigation, { NewButton } from '../Navigation'
 
@@ -18,23 +18,11 @@ const geolocateStyle = {
     margin: '5px',
   };
 
-// const Mediaitem = (media) => {
-//     console.log("mmmmedia",media);
-//     return(
-//         <>
-//         <div>Komtiiee: {media}</div>
-//         <img className="innerBox_img" src={media} alt='item post' />
-//         </>
-//     );
-    
-// };
-
   const Listitem = (props) => {
       const item = props.item;
 
     return(
     <div className="listitem shadow">
-        {/* <Mediaitem media={item.image.url}/> */}
         <img className="innerBox_img" src={item.image.url} alt='item post' />
         <div className="innerBox_top">
             <div className="innerBox_avatar">
@@ -366,7 +354,6 @@ const Homepage = (props) => {
                         }
                     }
                 }
-            // console.log('current zoom',viewport.zoom,'current latitude',viewport.latitude);
         }
         return(
         <div className="map">
@@ -422,9 +409,10 @@ const Homepage = (props) => {
                     </div>
                     <h5>{selectedItem.date}</h5>
                 </div>
-                {/* <Mediaitem media={selectedItem.image.url}/> */}
-
-                <img className="innerBox_img" src={selectedItem.image.url} alt='item post' />
+                <div className="innerBox_img centeredcolumn">
+                    <AtomicImage src={selectedItem.image.url}/>
+                </div>
+                {/* <img className="innerBox_img" src={selectedItem.image.url} alt='item post' /> */}
                 <div className="innerBox_below">
                     <p>{selectedItem.msg}</p>
                 </div>
@@ -444,5 +432,51 @@ const Homepage = (props) => {
         </div>);
     }
 
+
+
+
+class AtomicImage  extends Component {
+    constructor(props) {
+            super(props);
+            this.state = {
+                dimensions: {},
+                woord: '',
+                style: 'innerBox_img_landsc'
+            };
+            this.onImgLoad = this.onImgLoad.bind(this);
+        }
+        onImgLoad({target:img}) {
+            if (img.offsetHeight > img.offsetWidth) {
+                this.setState({
+                    woord:'staand',
+                    style: 'innerBox_img_portrait'
+                });
+            } else {
+                this.setState({
+                    woord:'liggend',
+                    style: 'innerBox_img_landsc'
+
+                });
+            }
+
+            this.setState({
+                dimensions:{
+                    height:img.offsetHeight,
+                    width:img.offsetWidth
+                }
+            });
+        }
+        render(){
+            const {src} = this.props;
+            const style = this.state.style;
+        
+            return (
+                    <img className={style} onLoad={this.onImgLoad} src={src} alt='item post' />
+                );
+        }
+    }
+
+
+
 export default Homepage;
-export { Listitem };
+export { Listitem, AtomicImage };

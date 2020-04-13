@@ -252,6 +252,18 @@ button {
   height: 64px;
   width: 64px;
 }
+.errormsg {
+  box-sizing: border-box;
+  padding: 15px;
+  margin: 10px 0 20px 0;
+  width: 275px;
+  background-color: #d1e7f2;
+}
+.errormsg p {
+  font-weight: 700;
+  color: black;
+  margin: 0;
+}
 .uploadedtotal {
   display: flex;
   flex-direction: column;
@@ -389,9 +401,9 @@ button {
   overflow-x: scroll;
   justify-content: flex-start;
   align-items: center;
-  padding: 80px 20px 35vh 20px;
+  padding: 100px 20px 15vh 20px;
   background: url(./imgs/Rikworld_navbg.png) repeat;
-  margin: -124px 0 0 0;
+  margin: -70px 0 0 0;
 }
 .aboutpage_txt {
   text-align: center;
@@ -406,6 +418,11 @@ button {
   font-size: 24px;
   font-weight: 700;
 }
+.aboutpage_txt a {
+  color: #ffef00;
+  text-decoration: underline;
+  font-weight: 700;
+}
 .aboutpage_txt p,
 .aboutpage_txt strong {
   color: white;
@@ -415,6 +432,13 @@ button {
 }
 .nowyoudont {
   opacity: 0;
+}
+.msgview {
+  padding-top: 200px;
+}
+.msgview input {
+  margin-top: 20px;
+  max-width: 600px;
 }
 .stickers_btn {
   position: -webkit-sticky;
@@ -450,6 +474,7 @@ button {
   justify-content: flex-start;
   align-items: flex-end;
   padding: 12vh 50px 50px 50px;
+  margin-top: -70px;
 }
 .newitem_img_infos {
   display: flex;
@@ -457,8 +482,8 @@ button {
   box-sizing: border-box;
   width: 100%;
   overflow-x: scroll;
-  justify-content: flex-start;
-  align-items: flex-start;
+  justify-content: center;
+  align-items: center;
   padding: 0;
 }
 .newitem_img_infos input {
@@ -475,7 +500,10 @@ button {
   height: auto;
 }
 .newitem_infos {
+  display: flex;
+  flex-direction: column;
   width: 100%;
+  flex: 1;
 }
 .img_upload_total {
   display: flex;
@@ -592,6 +620,13 @@ button {
 }
 .innerBox_img {
   width: 100%;
+  background: #f0f0f0;
+}
+.innerBox_img_landsc {
+  width: 100%;
+}
+.innerBox_img_portrait {
+  width: 75%;
 }
 .innerBox_below {
   display: flex;
@@ -652,12 +687,14 @@ button {
   align-items: flex-start;
 }
 .pointer {
-  width: 10px;
-  height: 10px;
+  width: 20px;
+  height: 20px;
+  margin: -6px 0 0 -3px;
   border-radius: 50%;
   left: 50vw;
   top: 38vh;
-  background: red;
+  background: white;
+  border: 4px solid #ffef00;
   z-index: 99;
   position: absolute;
 }
@@ -695,11 +732,11 @@ button {
   flex-direction: row;
   justify-content: flex-start;
   align-items: flex-end;
-  padding: 0 30px;
+  padding: 25px 30px 0 30px;
   position: absolute;
   top: 20px;
   z-index: 99;
-  width: 100%;
+  width: 80%;
 }
 .adressfinder button {
   background: none;
@@ -712,7 +749,7 @@ button {
   background: #ffef00;
   border: none;
   font-weight: bold;
-  margin: 25px 0 0 0;
+  margin: 0;
   max-width: 400px;
 }
 .locationdragger_bottom {
@@ -734,6 +771,11 @@ button {
 .react-geocoder {
   width: 100%;
   margin-bottom: 0px;
+}
+.react-geocoder-results {
+  box-sizing: border-box;
+  padding: 8px 10px;
+  background-color: white;
 }
 .react-geocoder input {
   box-sizing: border-box;
@@ -761,13 +803,11 @@ button {
   margin-top: -172px;
 }
 .listitem {
-  overflow: hidden;
   break-inside: avoid;
-  grid-column-start: col-start 0;
+  grid-column-start: auto;
   display: flex;
   flex-direction: column;
   box-sizing: border-box;
-  width: 355px;
   border-bottom: 1px solid #e2e2e2;
   background-color: white;
   -webkit-box-shadow: 0px 1px 2px 0px rgba(0, 0, 0, 0.1);
@@ -982,5 +1022,44 @@ button {
 @media screen and (min-height: 1000px), (min-width: 700px) {
   .newbtn_navigation_container {
     top: 78vh;
+  }
+}
+@media screen and (min-width: 700px) {
+  .newitem_total {
+    padding: 12vh 10vw 50px 10vw;
+  }
+  .newitem_infos {
+    padding: 0 0 0 50px;
+    align-items: flex-start;
+  }
+  .newitem_img_infos {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: flex-start;
+  }
+  .newitem_img_infos .ant-btn-lg {
+    margin: 0px 0 30px 0;
+  }
+  .loginbtn {
+    align-self: flex-end;
+  }
+  .list {
+    display: block;
+    column-count: 2;
+    column-gap: 20px;
+    align-items: flex-start;
+  }
+}
+@media screen and (min-width: 1000px) {
+  .list {
+    column-count: 3;
+    padding: 150px 15vw 50px 15vw;
+  }
+}
+@media screen and (min-width: 1500px) {
+  .list {
+    column-count: 4;
+    padding: 150px 15vw 50px 15vw;
   }
 }

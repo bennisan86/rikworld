@@ -290,6 +290,20 @@ button {
   height: 64px;
   width: 64px;
 }
+
+.errormsg {
+  @include box;
+  padding: 15px;
+  margin: 10px 0 20px 0;
+  width: 275px;
+  background-color: $lightish-blue;
+}
+.errormsg p {
+  font-weight: 700;
+  color:black;
+  margin: 0;
+}
+
 .uploadedtotal {
   @include column;
   justify-content: flex-end;
@@ -423,9 +437,9 @@ button {
   overflow-x: scroll;
   justify-content: flex-start;
   align-items: center;
-  padding: 80px 20px 35vh 20px;
+  padding: 100px 20px 15vh 20px;
   background: url(./imgs/Rikworld_navbg.png) repeat;
-  margin: -124px 0 0 0;
+  margin: -70px 0 0 0;
 }
 .aboutpage_txt {
   text-align: center;
@@ -440,6 +454,11 @@ button {
   font-size: 24px;
   font-weight: 700;
 }
+.aboutpage_txt a {
+  color: $yellow-base;
+  text-decoration: underline;
+  font-weight: 700;
+}
 .aboutpage_txt p, .aboutpage_txt strong {
   color: white;
 }
@@ -448,6 +467,13 @@ button {
 }
 .nowyoudont {
   opacity: 0;
+}
+.msgview {
+  padding-top: 200px;
+}
+.msgview input {
+  margin-top: 20px;
+  max-width: 600px;
 }
 .stickers_btn {
   position: -webkit-sticky;
@@ -479,7 +505,7 @@ button {
   @include box;
   width: 100%;
   justify-content: flex-start;
-  align-items: center;
+  align-items: flex-end;
   padding: 12vh 50px 50px 50px;
   margin-top: -70px;
 }
@@ -488,8 +514,8 @@ button {
   @include box;
   width: 100%;
   overflow-x: scroll;
-  justify-content: flex-start;
-  align-items: flex-start;
+  justify-content: center;
+  align-items: center;
   padding: 0;
 }
 .newitem_img_infos input {
@@ -504,7 +530,9 @@ button {
   height: auto;
 }
 .newitem_infos {
+  @include column;
   width: 100%;
+  flex:1;
 }
 .img_upload_total {
   @include column;
@@ -621,6 +649,13 @@ button {
 }
 .innerBox_img {
   width: 100%;
+  background: #F0F0F0;
+}
+.innerBox_img_landsc {
+  width: 100%;
+}
+.innerBox_img_portrait {
+  width: 75%;
 }
 .innerBox_below {
   @include column;
@@ -795,12 +830,11 @@ button {
   margin-top: -172px;
 }
 .listitem {
-  overflow: hidden;
+  // overflow: hidden;
   break-inside: avoid;
-  grid-column-start: col-start 0;
+  grid-column-start: auto;
   @include column;
   @include box;
-  width: 355px;
   border-bottom: 1px solid #E2E2E2;
   background-color: white;
   -webkit-box-shadow: 0px 1px 2px 0px rgba(0,0,0,0.10);
@@ -1092,5 +1126,46 @@ button {
 @media screen and ( min-height: 1000px ), ( min-width: 700px ) {
   .newbtn_navigation_container {
     top: 78vh;
+  }
+}
+
+
+@media screen and ( min-width: 700px ) {
+  .newitem_total {
+    padding: 12vh 10vw 50px 10vw;
+  }
+  .newitem_infos {
+    padding: 0 0 0 50px;
+    align-items: flex-start;
+  }
+  .newitem_img_infos {
+    @include row;
+    justify-content: flex-start;
+    align-items: flex-start;
+  }
+  .newitem_img_infos .ant-btn-lg {
+    margin: 0px 0 30px 0;
+  }
+  .loginbtn {
+    align-self: flex-end;
+  }
+  .list {
+    display: block;
+    column-count: 2;
+    column-gap: 20px;
+    align-items: flex-start;
+  }
+}
+
+@media screen and ( min-width: 1000px ) {
+  .list {
+    column-count: 3;
+    padding: 150px 15vw 50px 15vw;
+  }
+}
+@media screen and ( min-width: 1500px ) {
+  .list {
+    column-count: 4;
+    padding: 150px 15vw 50px 15vw;
   }
 }
