@@ -6,6 +6,10 @@ import { CloseButton } from '../Navigation';
 import { Edit, Cancel, Confirm } from '../../svgs/OtherIcons';
 import { Collapse, Input } from 'antd';
 import { Listitem } from '../Homepage';
+import * as ROUTES from '../../constants/routes';
+
+import Masonry from 'react-masonry-css'
+
 
 const Profile = (props) => {
     const [currentView, setCurrentView] = useState('');
@@ -17,6 +21,19 @@ const Profile = (props) => {
 
     const { Panel } = Collapse;
     const user = props.currentuser;
+
+    const breakpointColumnsObj = {
+        default: 3,
+        1100: 3,
+        700: 2,
+        500: 1
+      };
+
+    const showItemOnMap = (item) => {
+        props.history.push(ROUTES.HOME);
+        props.showItemOnMap(item);
+    }
+
     useEffect(() => {
         setMyItems(props.myItemsList);
         if(myItems !== null) {
@@ -88,11 +105,21 @@ const Profile = (props) => {
                             bordered={false}
                             defaultActiveKey={['0']}>
                             <Panel header="toon mijn items" key="1">
+                            <div className="list">
+                            <Masonry
+                            breakpointCols={breakpointColumnsObj}
+                            className="my-masonry-grid widthy"
+                            columnClassName="my-masonry-grid_column">
                                 {myItems &&
                                 myItems.map((item) => (
-                                    <Listitem key={item.uid} item={item}/>
+                                    <Listitem
+                                    key={item.uid}
+                                    item={item}
+                                    onClick={() => showItemOnMap(item)}/>
                                 ))
                                 }
+                            </Masonry>
+                            </div>
                             </Panel>
                         </Collapse>
                         </>
@@ -143,11 +170,21 @@ const Profile = (props) => {
                                 bordered={false}
                                 defaultActiveKey={['0']}>
                                 <Panel header="toon mijn items" key="1">
+                                <div className="list">
+                                <Masonry
+                                breakpointCols={breakpointColumnsObj}
+                                className="my-masonry-grid widthy"
+                                columnClassName="my-masonry-grid_column">
                                     {myItems &&
                                     myItems.map((item) => (
-                                        <Listitem key={item.uid} item={item}/>
+                                        <Listitem
+                                        key={item.uid}
+                                        item={item}
+                                        onClick={() => showItemOnMap(item)}/>
                                     ))
                                     }
+                                </Masonry>
+                                </div>
                                 </Panel>
                             </Collapse>
                         </>

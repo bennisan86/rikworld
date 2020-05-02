@@ -157,10 +157,8 @@ button {
   @include fullwidth;
   @include column;
   @include box;
-
   background-color: rgba(0,0,0,0.5);
-  padding: 10vw;
-  z-index: 5;
+  z-index: 999;
   position: absolute;
   justify-content: center;
   align-items: center;
@@ -176,6 +174,8 @@ button {
   z-index: 99;
   border-radius: 10px;
   margin-top: -50px;
+  max-height: 82vh;
+  overflow: scroll;
 }
 
 
@@ -185,7 +185,7 @@ button {
   @include row;
   position: -webkit-sticky;
   position: sticky;
-  z-index: 2;
+  z-index: 99;
   width: 100%;
   height: 110px;
   padding: 0px 30px 0 30px;
@@ -302,6 +302,10 @@ button {
   font-weight: 700;
   color:black;
   margin: 0;
+}
+.nomrg {
+  width: 100%;
+  margin: 20px 0 0 0;
 }
 
 .uploadedtotal {
@@ -437,7 +441,7 @@ button {
   overflow-x: scroll;
   justify-content: flex-start;
   align-items: center;
-  padding: 100px 20px 15vh 20px;
+  padding: 100px 20px 25vh 20px;
   background: url(./imgs/Rikworld_navbg.png) repeat;
   margin: -70px 0 0 0;
 }
@@ -447,6 +451,7 @@ button {
   @include box;
   padding: 35px 10vw 35px 10vw;
   margin: 50px 0 0 0;
+  max-width: 900px;
 }
 .aboutpage_txt h2 {
   color: $yellow-base;
@@ -455,9 +460,8 @@ button {
   font-weight: 700;
 }
 .aboutpage_txt a {
-  color: $yellow-base;
+  color: inherit;
   text-decoration: underline;
-  font-weight: 700;
 }
 .aboutpage_txt p, .aboutpage_txt strong {
   color: white;
@@ -476,19 +480,6 @@ button {
   max-width: 600px;
 }
 .stickers_btn {
-  position: -webkit-sticky;
-  position: sticky;
-  top: 72vh;
-  left: 0px;
-  width: 100%;
-  height: 54px;
-  @include row;
-  align-items: center;
-  justify-content: center;
-}
-.stickers_btn button {
-  @include clearbtn;
-  color: black;
   width: 265px;
   padding: 18px 0 16px;
   height: auto;
@@ -496,7 +487,12 @@ button {
   max-width: 400px;
   border: none;
   font-weight: bold;
-  margin: 0;
+  margin: 30px 0 0 0;
+  border-radius: 4px;
+}
+.stickers_btn a {
+  color: black;
+  font-size: 16px;
 }
 
 /* NEWITEM */
@@ -533,6 +529,20 @@ button {
   @include column;
   width: 100%;
   flex:1;
+}
+.pasw_error {
+  font-weight: bold;
+  margin: 10px 0 0 0;
+}
+.pasw_error p {
+  color: $blue-base;
+}
+.conditions {
+  @include box;
+  font-size: 10px;
+  margin-top: 15px;
+  padding: 0 20px;
+  text-align: center;
 }
 .img_upload_total {
   @include column;
@@ -586,8 +596,9 @@ button {
 /* INNERBOX */
 .innerBox {
   width: 300px;
-  max-height: 475px;
+  max-height: 350px;
   overflow-y: scroll;
+  -webkit-overflow-scrolling: touch;
 }
 .innerBox_top {
   @include row;
@@ -600,7 +611,6 @@ button {
   @include row;
   align-items: center;
   justify-content: flex-start;
-  flex: 1;
 }
 
 .innerBox_avatar p {
@@ -608,6 +618,9 @@ button {
   font-weight: 700;
   text-align: right;
   margin: 0 0 0 8px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .innerBox_below p {
@@ -618,14 +631,20 @@ button {
   font-weight: 700;
   color: #CDCDCD;
   margin: 0;
+
 }
 
 .innerBox_top h5 {
   font-weight: normal;
-  margin: 0;
+  margin: 0 0 0 10px;
   font-size: 14px;
   line-height: 1.5em;
   color: #616161;
+  text-align: right;
+  flex: 1;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .innerBox_location {
@@ -688,11 +707,17 @@ button {
 .mapitem .innerBox_location svg {
   margin: 3px 4px 0 0px;
 }
+
+.listitem .innerBox_location_total {
+  @include box;
+  @include column;
+  padding: 15px 20px 20px;
+  background: #f0f5f7;
+}
 .listitem .innerBox_location {
   @include box;
-  width: 100%;
-  border-top: 1px dotted $blue-base;
-  padding: 20px 0 30px 0;
+  padding: 10px 20px;
+  margin: 0;
   justify-content: center;
 }
 .listitem .innerBox_location:hover, .listitem .innerBox_location a:hover, .listitem .innerBox_location svg:hover {
@@ -745,12 +770,8 @@ button {
 .locatie_aanduiden_btn_latlong p {
   font-size: 14px;
   font-weight: bold;
-  text-decoration: underline;
-  color: $blue-base;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  max-width: 80px;
+  text-decoration: none;
+  color: #56c77f;
   margin: 0;
 }
 .adressfinder {
@@ -804,12 +825,14 @@ button {
   @include box;
   min-height: 40px;
   width: 100%;
-  padding: 14px 15px 10px;
+  padding: 14px 15px 10px 40px;
   font-weight: bold;
   font-size: 14px;
   border: 1px solid #d9d9d9;
-  border-radius: 4px;
+  border-radius: 10px;
   line-height: 1.5;
+  background: url(./imgs/search.png) no-repeat 10px 10px white;
+  background-size: 25px 25px;
 }
 
 .react-geocoder input:focus {
@@ -831,6 +854,8 @@ button {
 }
 .listitem {
   // overflow: hidden;
+  width: 100%;
+  max-width: 370px;
   break-inside: avoid;
   grid-column-start: auto;
   @include column;
@@ -865,12 +890,18 @@ button {
   @include box;
   justify-content: center;
   align-items: center;
-  padding: 0 0 50px 0;
+  padding: 0 0 15px 0;
 }
 
 .avatar_edit_btn {
-  position: absolute;
-  margin: 34px 0 0 30px;
+  margin: -34px 0 0 60px;
+  padding: 12px 12px 5px 12px;
+  background: white;
+  border: none;
+  border-radius: 50%;
+}
+.avatar_rotate_btn {
+  margin: 0;
   padding: 12px 12px 5px 12px;
   background: white;
   border: none;
@@ -961,7 +992,10 @@ button {
   -webkit-filter: drop-shadow( 0px 3px 6px rgba(0, 0, 0, .25));
   filter: drop-shadow( 0px 3px 6px rgba(0, 0, 0, .25));
 }
+.mapboxgl-marker {
+  z-index: 98;
 
+}
 
 
 .markpos18 {
@@ -1124,11 +1158,27 @@ button {
 /* NEW RESPONSIVENESS */
 
 @media screen and ( min-height: 1000px ), ( min-width: 700px ) {
+  .aboutpage_total {
+    // @include row;
+  }
+
   .newbtn_navigation_container {
     top: 78vh;
   }
+  .cond_new {
+    align-self: flex-end;
+    text-align: right;
+    padding-right: 0;
+  }
 }
 
+@media screen and ( min-height: 699px ) {
+  .innerBox {
+    -webkit-overflow-scrolling: touch;
+    overflow-y: scroll;
+    max-height: 400px;
+  }
+}
 
 @media screen and ( min-width: 700px ) {
   .newitem_total {
@@ -1149,23 +1199,50 @@ button {
   .loginbtn {
     align-self: flex-end;
   }
-  .list {
-    display: block;
-    column-count: 2;
-    column-gap: 20px;
-    align-items: flex-start;
-  }
+  // .list {
+  //   display: block;
+  //   column-count: 2;
+  //   column-gap: 20px;
+  //   align-items: flex-start;
+  // }
 }
 
 @media screen and ( min-width: 1000px ) {
-  .list {
-    column-count: 3;
-    padding: 150px 15vw 50px 15vw;
-  }
+  // .list {
+  //   column-count: 3;
+  //   padding: 150px 15vw 50px 15vw;
+  // }
 }
 @media screen and ( min-width: 1500px ) {
   .list {
     column-count: 4;
     padding: 150px 15vw 50px 15vw;
   }
+}
+
+
+
+
+
+
+.my-masonry-grid {
+  display: -webkit-box; /* Not needed if autoprefixing */
+  display: -ms-flexbox; /* Not needed if autoprefixing */
+  display: flex;
+  margin-left: -10px; /* gutter size offset */
+  width: auto;
+}
+.my-masonry-grid_column {
+  padding-left: 10px; /* gutter size */
+  background-clip: padding-box;
+}
+ 
+/* Style your items */
+.my-masonry-grid_column > div { /* change div to reference your elements you put in <Masonry> */
+  margin-bottom: 30px;
+}
+
+
+.ant-collapse-borderless > .ant-collapse-item > .ant-collapse-content, .widthy {
+  width: 100%;
 }

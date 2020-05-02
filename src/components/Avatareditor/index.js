@@ -1,6 +1,6 @@
 import React from "react";
 import ReactAvatarEditor from 'react-avatar-editor'
-import { Up, Cancel, Confirm } from '../../svgs/OtherIcons'
+import { Up, Cancel, Confirm, Rotate } from '../../svgs/OtherIcons'
 import { Slider } from 'antd';
 
 class Avatareditor extends React.Component {
@@ -30,6 +30,10 @@ class Avatareditor extends React.Component {
 
   handleScale = e => {
     this.setState({ scale: e })
+  }
+  rotateThis = e => {
+    const currentrotation = this.state.rotate + 90;
+    this.setState({ rotate: currentrotation })
   }
 
   handlePositionChange = position => {
@@ -90,12 +94,12 @@ class Avatareditor extends React.Component {
 
         {this.state.currentv ? 
         <div className={this.state.classerzzzz}>
-            <button className="avatar_edit_btn shadow" onClick={this.triggerClick}>
-              <Up width={16}/>
-            </button>
             <div className="avatar">
                 <img src={this.state.image} alt="uploaded avatar"/>
             </div>
+            <button className="avatar_edit_btn shadow" onClick={this.triggerClick}>
+              <Up width={16}/>
+            </button>
         </div>
         :
         <div className="centeredcolumn">
@@ -113,17 +117,22 @@ class Avatareditor extends React.Component {
               className="editor-canvas"
             />
           </div>
-          <Slider
-            className="zoomslider"
-            name="scale"
-            tooltipVisible={false}
-            onChange={this.handleScale}
-            min={0.1}
-            max={5}
-            step={0.01}
-            defaultValue={0}
-            value={this.state.scale}
-          />
+          <div className="centeredrow">
+            <Slider
+              className="zoomslider"
+              name="scale"
+              tooltipVisible={false}
+              onChange={this.handleScale}
+              min={0.1}
+              max={5}
+              step={0.01}
+              defaultValue={0}
+              value={this.state.scale}
+            />
+            <button className="avatar_rotate_btn shadow" onClick={this.rotateThis}>
+                <Rotate width={16}/>
+            </button>
+          </div>
           <div className="centeredrow">
             <button className="avatar_cc_btn shadow" onClick={this.onClickNope}>
               <Cancel width={14}/>

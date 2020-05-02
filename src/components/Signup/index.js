@@ -13,6 +13,7 @@ const INITIAL_STATE = {
     passwordOne: '',
     passwordTwo: '',
     error: null,
+    errormsg: 'Er ging iets mis. Probeer het later opnieuw.',
     avatar: ''
   };
   
@@ -49,8 +50,23 @@ const INITIAL_STATE = {
         event.preventDefault();
     }
     onChange = event => {
+        // if (this.state.passwordOne.length > 4 && this.state.passwordTwo.length > 4){
+        //   if(this.state.passwordOne !== this.state.passwordTwo){
+        //     this.setState({
+        //       error: true,
+        //       errormsg: "Je paswoorden zijn niet identiek."
+        //     });
+        //   } else {
+        //     this.setState({
+        //       error: null,
+        //       errormsg: 'Er ging iets mis. Probeer het later opnieuw.',
+        //     });       
+        //   }
+        //   console.log("passwordOne,passwordTwo:",this.state.passwordOne,this.state.passwordTwo);
+        // }
         this.setState({ [event.target.name]: event.target.value });
-    }
+
+      }
 
     setImage = image => {
       this.setState({ avatar: image });
@@ -62,6 +78,7 @@ const INITIAL_STATE = {
             passwordOne,
             passwordTwo,
             error,
+            errormsg,
             avatar,
           } = this.state;
 
@@ -71,6 +88,9 @@ const INITIAL_STATE = {
             email === '' ||
             username === '' ||
             avatar === '';
+
+        const wrongPass = (passwordTwo.length > 5) && (passwordOne !== passwordTwo);
+
 
         return (
           <div>
@@ -113,6 +133,7 @@ const INITIAL_STATE = {
             type="password"
             placeholder="Herhaal je paswoord"
           />
+          {wrongPass && <div className="pasw_error"><p>Je paswoorden zijn niet identiek.</p></div>}
           <Button
             size="large"
             className="loginbtn shadow margbot20"
@@ -120,7 +141,10 @@ const INITIAL_STATE = {
             onClick={this.onSubmit}>
               aanmaken
               </Button>
-          {error && <p>{error.message}</p>}
+              {isInvalid &&
+            <div className="conditions"><p>Om een account te creëren moet je een foto, een gebruikersnaam, een e-mailadres en een paswoord van minstens 6 tekens opgeven.</p></div>}
+          {error &&
+          <div className="errormsg nomrg"><p>{errormsg}</p></div>}
         </div>
       );
     }

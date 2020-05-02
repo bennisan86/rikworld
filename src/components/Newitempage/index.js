@@ -60,7 +60,8 @@ class Newitem extends Component {
                 long: null,
                 image: {
                     image: null,
-                    url: ''
+                    url: '',
+                    imagenametotal: ''
                 }
             }
         );
@@ -101,7 +102,9 @@ class Newitem extends Component {
 
     handleUpload = (image) => {
         if(this.isFileImage(image)){
-            const uploadTask = this.props.firebase.strg.ref(`itempics/${image.name}`).put(image);
+            const imagenametotal = this.props.currentuserid + "_" + new Date().getTime() + "_"  + image.name;
+            console.log("imagenametotal", imagenametotal, "do I have a user here? ",this.props.currentuserid);
+            const uploadTask = this.props.firebase.strg.ref(`itempics/${imagenametotal}`).put(image);
             uploadTask.on('state_changed', 
             (snapshot) => {
                 console.log('this is progress!',snapshot);
@@ -114,14 +117,15 @@ class Newitem extends Component {
                 console.log(error);
             },
             () => {
-                this.props.firebase.strg.ref(`itempics/`).child(image.name).getDownloadURL().then(url => {
+                this.props.firebase.strg.ref(`itempics/`).child(imagenametotal).getDownloadURL().then(url => {
                     console.log(url);
                     this.setState({
                         showerror: false, 
                         progress: false,
                         image: {
                             image: image,
-                            url: url
+                            url: url,
+                            imagenametotal: imagenametotal
                         }
                     });
                 });
@@ -134,7 +138,7 @@ class Newitem extends Component {
     }
 
     deleteUpload = () => {
-        const delimage = this.state.image.image.name;
+        const delimage = this.state.image.imagenametotal;
         let state = this;
         this.props.firebase.strg.ref(`itempics/`).child(delimage).delete().then(function() {
             state.setState({ 
@@ -155,17 +159,19 @@ class Newitem extends Component {
     render(){
         const { msg, date, lat, long, image, progress } = this.state;
         const { TextArea } = Input;
+
+        const test = this.state.image.url === '';
+        // console.log('test',test);
+
         const isInvalid = 
             msg !== "" &
             date !== "" &
             lat !== null &
             long !== null &
-            image !== {
-                image: null,
-                url: ''
-            };
+            test === false &
+            progress === false;
 
-        console.log('isInvalid',isInvalid, 'state',this.state);
+        // console.log('isInvalid',isInvalid, 'state',this.state.image);
         return (
             <AuthUserContext.Consumer>
                 {authUser => (
@@ -218,13 +224,18 @@ class Newitem extends Component {
                     size="large"
                     className="navshadow centeredrow">
                         <div className="locatie_aanduiden_btn">
-                            <Locationpin width={16} />
                             {lat && long ?
+                            <>
+                            <Locationpin width={16} fill="#60cc87"/>
                             <div className="locatie_aanduiden_btn_latlong centeredrow">
-                            <p>{long}</p><p> - </p><p>{lat}</p>
+                            <p>locatie opgegeven!</p>
                             </div>
+                            </>
                             :
-                            <p>locatie aanduiden op kaart</p>}
+                            <>
+                            <Locationpin width={16} />
+                            <p>locatie aanduiden op kaart</p>
+                            </>}
                         </div>
                     </Button>
                     <TextArea
@@ -245,6 +256,9 @@ class Newitem extends Component {
                         onChange={event => this.onChangeText(event)}
                         />
                 <Button className="loginbtn" disabled={!isInvalid} onClick={event => this.onCreateItem(event, authUser)}>posten!</Button>
+                {!isInvalid &&
+                <div className="conditions cond_new"><p>Om een item te posten, moet je een foto, een locatie, een bericht en een datum opgeven.</p></div>
+                }
                 </div>
                 </div>
 

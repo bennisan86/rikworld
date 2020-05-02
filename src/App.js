@@ -12,6 +12,7 @@ class App extends Component {
     super(props);
     this.state = {
       itemsList: null,
+      revItemlist: null,
       myItemsList: null,
       tempitem: {
         msg: '',
@@ -20,12 +21,14 @@ class App extends Component {
         long: null,
         image: {
           image: null,
-          url: ''
+          url: '',
+          imagenametotal: ''
           }
       },
       maplist: true,
       currentuser: null,
-      currentuserid: null
+      currentuserid: null,
+      currentitem: null
     };
   }
 
@@ -42,8 +45,10 @@ class App extends Component {
               )
           })
         );
+        const revItemlist = itemsList.reverse();
         this.setState({
-          itemsList:itemsList,
+          itemsList:revItemlist,
+          // revItemlist:revItemlist
         });
         this.setMyItems();
 
@@ -127,6 +132,14 @@ class App extends Component {
     }
   }
 
+  showItemOnMap(item){
+    this.setState({
+      maplist: true,
+      currentitem: item,
+    });
+    // console.log(">>>> ! item in functie",item);
+  }
+
   newUserStuff(stuff){
     if(stuff.newAvatar !== null && stuff.newUsername !== null) {
       // console.log("alles verandert!")
@@ -167,6 +180,9 @@ class App extends Component {
 
 
   render(){
+    // if(this.state.itemsList){
+    //   const revvy = this.state.itemsList.reverse();
+    // }
     return (
           <Switch>
             <Route exact path="/" render={(props) =>
@@ -182,10 +198,11 @@ class App extends Component {
                 <Profile
                 {...this.state}
                 {...this.props}
-                newUserStuff={(stuff) => this.newUserStuff(stuff)} />}/>
+                newUserStuff={(stuff) => this.newUserStuff(stuff)}
+                showItemOnMap={(item) => this.showItemOnMap(item)} />}/>
             <Route
               exact path="/newitem"
-              render={(props) => <Newitem {...props} tempitem={this.state.tempitem} onSubmit={(tempdata) => this.setTempData(tempdata)} />} />
+              render={(props) => <Newitem {...this.state} {...this.props} tempitem={this.state.tempitem} onSubmit={(tempdata) => this.setTempData(tempdata)} />} />
             <Route exact path="/locationdragger" render={(props) => <Locationdragger tempitem={this.state.tempitem} {...props} onSubmit={(tempdata) => this.setTempData(tempdata)} />} />
           </Switch>
     );

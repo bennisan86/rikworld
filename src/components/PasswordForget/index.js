@@ -40,10 +40,10 @@ class PasswordForgetFormBase extends Component {
 <div>
       <p className="centeredtxt">Paswoord vergeten?</p>
       <Input
-      name="passwordTwo"
+      // name="passwordTwo"
       className="inputter"
       size="large"
-      // name="email"
+      name="email"
       value={this.state.email}
       onChange={this.onChange}
       type="text"

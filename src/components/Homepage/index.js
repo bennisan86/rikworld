@@ -10,6 +10,8 @@ import Avatar from '../Avatar';
 import RikPin from '../../svgs/RikPin'
 import { Locationpin } from '../../svgs/OtherIcons'
 
+import Masonry from 'react-masonry-css'
+
 
 const geolocateStyle = {
     top: '120px',
@@ -20,7 +22,6 @@ const geolocateStyle = {
 
   const Listitem = (props) => {
       const item = props.item;
-
     return(
     <div className="listitem shadow">
         <img className="innerBox_img" src={item.image.url} alt='item post' />
@@ -34,10 +35,12 @@ const geolocateStyle = {
         <div className="innerBox_below">
             <p>{item.msg}</p>
         </div>
-        <div className="innerBox_location" onClick={props.onClick}>
-            <Locationpin width={16} />
-            <div className="innerBox_location_latlong centeredrow">
-                <p>toon op map</p>
+        <div className="innerBox_location_total">
+            <div className="innerBox_location" onClick={props.onClick}>
+                <Locationpin width={16} />
+                <div className="innerBox_location_latlong centeredrow">
+                    <p>toon op map</p>
+                </div>
             </div>
         </div>
     </div>
@@ -50,10 +53,17 @@ const Homepage = (props) => {
     const [showOverlay, toggleShowOverlay] = useState(false);
     const [buttonStyle, setButtonstyle] = useState('nowyouseeme');
 
-    const [currentItem, setCurrentItem] = useState(null);
+    const [currentItem, setCurrentItem] = useState(props.currentitem);
 
     const maplist = props.maplist;
     const itemsList = props.itemsList;
+
+    const breakpointColumnsObj = {
+        default: 3,
+        1100: 3,
+        700: 2,
+        500: 1
+      };
 
     const showItemOnMap = (item) => {
         props.toggleMaplist(maplist);
@@ -88,14 +98,20 @@ const Homepage = (props) => {
                 }
                 {!props.maplist && 
                     <div className="list">
+                    <Masonry
+                    breakpointCols={breakpointColumnsObj}
+                    className="my-masonry-grid"
+                    columnClassName="my-masonry-grid_column">
                         {itemsList &&
                         itemsList.map((item) => (
                             <Listitem
                                 key={item.uid}
                                 item={item}
-                                onClick={() => showItemOnMap(item)}/>
+                                onClick={() => showItemOnMap(item)}
+                                history={props.history}/>
                         ))
                         }
+                    </Masonry>
                     </div>
                 }
             </div>
@@ -118,11 +134,10 @@ const Homepage = (props) => {
 
         useEffect(() => {
             if(props.currentItem !== null) {
-                console.log("in map::", props.currentItem);
                 setSelectedItem(props.currentItem);
                 setAlteredViewport(props.currentItem,viewport);
             } else {
-                console.log("in map is null");
+                // console.log("in map is null");
             }
         },[]);
 

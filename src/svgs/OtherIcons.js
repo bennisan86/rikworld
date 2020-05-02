@@ -197,7 +197,31 @@ const Delete = ({
 
 
 
+const Rotate = ({
+  style = {},
+  fill = "#0073A7",
+  width = "100%",
+  className = "",
+  viewBox = "0 0 520.09 687.27"
+}) => (
+  <svg
+    width={width}
+    style={style}
+    height={width}
+    viewBox={viewBox}
+    xmlns="http://www.w3.org/2000/svg"
+    className={`svg-icon ${className || ""}`}
+    xmlnsXlink="http://www.w3.org/1999/xlink"
+  >
+    <path d="M292.13,1.22a17.07,17.07,0,0,0-9.54,22.17l23.07,57.92c-113.11-46.52-242.5,7.46-289,120.57a221.45,221.45,0,0,0-.76,166.56,17.07,17.07,0,1,0,31.71-12.63C9.24,259.48,56.24,150.3,152.57,112a187.75,187.75,0,0,1,151.18,5.41l-60.91,51.4a17.09,17.09,0,0,0,22,26.13l82.5-69.6a17.08,17.08,0,0,0,4.84-19.41L314.3,10.75A17.06,17.06,0,0,0,292.13,1.22Z"/>
+    <path d="M520.09,687.27H163.73V252.6H520.09Zm-326.36-30H490.09V282.6H193.73Z"/>
+    </svg>
+);
+
+
+
+
 
 
 export default Plus;
-export { Up, Cancel, Confirm,Image,Locationpin,Edit,Delete };
+export { Up, Cancel, Confirm,Image,Locationpin,Edit,Delete, Rotate };

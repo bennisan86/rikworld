@@ -7,6 +7,7 @@ import avatardefault from '../Avatar/avatar_default.png';
     email: '',
     password: '',
     error: null,
+    errormsg: 'Er ging iets mis. Probeer het later opnieuw.',
   };
 
   class SignInFormBase extends Component {
@@ -25,6 +26,17 @@ import avatardefault from '../Avatar/avatar_default.png';
           // this.props.history.push(ROUTES.HOME);
         })
         .catch(error => {
+          console.log(error);
+          switch(error.code) {
+            case 'auth/user-not-found':
+              this.setState({ errormsg: "Geen gebruiker gevonden met dit e-mailadres." });
+            break;
+            case 'auth/wrong-password':
+              this.setState({ errormsg: "Je e-mailadres en/of paswoord zijn niet correct." });
+              break;
+            default:
+              this.setState({ errormsg: "Er ging iets mis. Probeer het later opnieuw." });
+          }
           this.setState({ error });
         });
       event.preventDefault();
@@ -35,7 +47,7 @@ import avatardefault from '../Avatar/avatar_default.png';
 
 
     render() {
-      const { email, password, error } = this.state;
+      const { email, password, error, errormsg } = this.state;
       const isInvalid = password === '' || email === '';
       return (
       <div className="centeredcolumn">
@@ -64,7 +76,8 @@ import avatardefault from '../Avatar/avatar_default.png';
             disabled={isInvalid}
             onClick={this.onSubmit}>inloggen
           </Button>
-          {error && <p>{error.message}</p>}
+          {error && 
+          <div className="errormsg nomrg"><p>{errormsg}</p></div>}
       </div>
       );
     }
