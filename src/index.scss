@@ -467,10 +467,10 @@ button {
   color: white;
 }
 .nowyouseeme {
-  opacity: 1;
+  display: block;
 }
 .nowyoudont {
-  opacity: 0;
+  display: none;
 }
 .msgview {
   padding-top: 200px;
