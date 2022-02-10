@@ -14,7 +14,7 @@
     "deck.gl": "^8.0.15",
     "firebase": "^7.7.0",
     "load-image-react": "^1.0.2",
-    "node-sass": "^4.13.1",
+    "node-sass": "^7.0.0",
     "react": "^16.12.0",
     "react-avatar-editor": "^12.0.0-beta.0",
     "react-dom": "^16.12.0",
